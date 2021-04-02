@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.StudentDao">
+  <resultMap id="BaseResultMap" type="com.example.backend.model.Student">
+    <id column="student_sno" jdbcType="INTEGER" property="studentSno" />
+    <result column="student_name" jdbcType="VARCHAR" property="studentName" />
+    <result column="student_major" jdbcType="VARCHAR" property="studentMajor" />
+    <result column="student_grade" jdbcType="VARCHAR" property="studentGrade" />
+    <result column="student_class" jdbcType="VARCHAR" property="studentClass" />
+    <result column="student_sex" jdbcType="VARCHAR" property="studentSex" />
+    <result column="student_data" jdbcType="DATE" property="studentData" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    student_sno, student_name, student_major, student_grade, student_class, student_sex, 
+    student_data
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where student_sno = #{studentSno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from student
+    where student_sno = #{studentSno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="student_sno" keyProperty="studentSno" parameterType="com.example.backend.model.Student" useGeneratedKeys="true">
+    insert into student (student_name, student_major, student_grade, 
+      student_class, student_sex, student_data
+      )
+    values (#{studentName,jdbcType=VARCHAR}, #{studentMajor,jdbcType=VARCHAR}, #{studentGrade,jdbcType=VARCHAR}, 
+      #{studentClass,jdbcType=VARCHAR}, #{studentSex,jdbcType=VARCHAR}, #{studentData,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="student_sno" keyProperty="studentSno" parameterType="com.example.backend.model.Student" useGeneratedKeys="true">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="studentName != null">
+        student_name,
+      </if>
+      <if test="studentMajor != null">
+        student_major,
+      </if>
+      <if test="studentGrade != null">
+        student_grade,
+      </if>
+      <if test="studentClass != null">
+        student_class,
+      </if>
+      <if test="studentSex != null">
+        student_sex,
+      </if>
+      <if test="studentData != null">
+        student_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="studentName != null">
+        #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentMajor != null">
+        #{studentMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="studentGrade != null">
+        #{studentGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="studentClass != null">
+        #{studentClass,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSex != null">
+        #{studentSex,jdbcType=VARCHAR},
+      </if>
+      <if test="studentData != null">
+        #{studentData,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.Student">
+    update student
+    <set>
+      <if test="studentName != null">
+        student_name = #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentMajor != null">
+        student_major = #{studentMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="studentGrade != null">
+        student_grade = #{studentGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="studentClass != null">
+        student_class = #{studentClass,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSex != null">
+        student_sex = #{studentSex,jdbcType=VARCHAR},
+      </if>
+      <if test="studentData != null">
+        student_data = #{studentData,jdbcType=DATE},
+      </if>
+    </set>
+    where student_sno = #{studentSno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.backend.model.Student">
+    update student
+    set student_name = #{studentName,jdbcType=VARCHAR},
+      student_major = #{studentMajor,jdbcType=VARCHAR},
+      student_grade = #{studentGrade,jdbcType=VARCHAR},
+      student_class = #{studentClass,jdbcType=VARCHAR},
+      student_sex = #{studentSex,jdbcType=VARCHAR},
+      student_data = #{studentData,jdbcType=DATE}
+    where student_sno = #{studentSno,jdbcType=INTEGER}
+  </update>
+</mapper>

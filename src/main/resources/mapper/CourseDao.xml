@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.CourseDao">
+  <resultMap id="BaseResultMap" type="com.example.backend.model.Course">
+    <id column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="course_english" jdbcType="VARCHAR" property="courseEnglish" />
+    <result column="course_classification" jdbcType="VARCHAR" property="courseClassification" />
+    <result column="course_character" jdbcType="VARCHAR" property="courseCharacter" />
+    <result column="course_term" jdbcType="VARCHAR" property="courseTerm" />
+    <result column="course_credit" jdbcType="FLOAT" property="courseCredit" />
+    <result column="course_class_hour" jdbcType="INTEGER" property="courseClassHour" />
+    <result column="course_major" jdbcType="VARCHAR" property="courseMajor" />
+    <result column="course_examination_method" jdbcType="VARCHAR" property="courseExaminationMethod" />
+    <result column="course_specific_method" jdbcType="VARCHAR" property="courseSpecificMethod" />
+    <result column="course_advanced_placement" jdbcType="VARCHAR" property="courseAdvancedPlacement" />
+    <result column="course_teacher" jdbcType="INTEGER" property="courseTeacher" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    course_name, course_english, course_classification, course_character, course_term,
+    course_credit, course_class_hour, course_major, course_examination_method, course_specific_method,
+    course_advanced_placement, course_teacher
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from course
+    where course_name = #{courseName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from course
+    where course_name = #{courseName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="course_name" keyProperty="courseName" parameterType="com.example.backend.model.Course" useGeneratedKeys="true">
+    insert into course (course_english, course_classification,
+      course_character, course_term, course_credit,
+      course_class_hour, course_major, course_examination_method,
+      course_specific_method, course_advanced_placement,
+      course_teacher)
+    values (#{courseEnglish,jdbcType=VARCHAR}, #{courseClassification,jdbcType=VARCHAR},
+      #{courseCharacter,jdbcType=VARCHAR}, #{courseTerm,jdbcType=VARCHAR}, #{courseCredit,jdbcType=FLOAT},
+      #{courseClassHour,jdbcType=INTEGER}, #{courseMajor,jdbcType=VARCHAR}, #{courseExaminationMethod,jdbcType=VARCHAR},
+      #{courseSpecificMethod,jdbcType=VARCHAR}, #{courseAdvancedPlacement,jdbcType=VARCHAR},
+      #{courseTeacher,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="course_name" keyProperty="courseName" parameterType="com.example.backend.model.Course" useGeneratedKeys="true">
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseEnglish != null">
+        course_english,
+      </if>
+      <if test="courseClassification != null">
+        course_classification,
+      </if>
+      <if test="courseCharacter != null">
+        course_character,
+      </if>
+      <if test="courseTerm != null">
+        course_term,
+      </if>
+      <if test="courseCredit != null">
+        course_credit,
+      </if>
+      <if test="courseClassHour != null">
+        course_class_hour,
+      </if>
+      <if test="courseMajor != null">
+        course_major,
+      </if>
+      <if test="courseExaminationMethod != null">
+        course_examination_method,
+      </if>
+      <if test="courseSpecificMethod != null">
+        course_specific_method,
+      </if>
+      <if test="courseAdvancedPlacement != null">
+        course_advanced_placement,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseEnglish != null">
+        #{courseEnglish,jdbcType=VARCHAR},
+      </if>
+      <if test="courseClassification != null">
+        #{courseClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCharacter != null">
+        #{courseCharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTerm != null">
+        #{courseTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCredit != null">
+        #{courseCredit,jdbcType=FLOAT},
+      </if>
+      <if test="courseClassHour != null">
+        #{courseClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="courseMajor != null">
+        #{courseMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="courseExaminationMethod != null">
+        #{courseExaminationMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="courseSpecificMethod != null">
+        #{courseSpecificMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="courseAdvancedPlacement != null">
+        #{courseAdvancedPlacement,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.Course">
+    update course
+    <set>
+      <if test="courseEnglish != null">
+        course_english = #{courseEnglish,jdbcType=VARCHAR},
+      </if>
+      <if test="courseClassification != null">
+        course_classification = #{courseClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCharacter != null">
+        course_character = #{courseCharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTerm != null">
+        course_term = #{courseTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCredit != null">
+        course_credit = #{courseCredit,jdbcType=FLOAT},
+      </if>
+      <if test="courseClassHour != null">
+        course_class_hour = #{courseClassHour,jdbcType=INTEGER},
+      </if>
+      <if test="courseMajor != null">
+        course_major = #{courseMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="courseExaminationMethod != null">
+        course_examination_method = #{courseExaminationMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="courseSpecificMethod != null">
+        course_specific_method = #{courseSpecificMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="courseAdvancedPlacement != null">
+        course_advanced_placement = #{courseAdvancedPlacement,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTeacher != null">
+        course_teacher = #{courseTeacher,jdbcType=INTEGER},
+      </if>
+    </set>
+    where course_name = #{courseName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.backend.model.Course">
+    update course
+    set course_english = #{courseEnglish,jdbcType=VARCHAR},
+      course_classification = #{courseClassification,jdbcType=VARCHAR},
+      course_character = #{courseCharacter,jdbcType=VARCHAR},
+      course_term = #{courseTerm,jdbcType=VARCHAR},
+      course_credit = #{courseCredit,jdbcType=FLOAT},
+      course_class_hour = #{courseClassHour,jdbcType=INTEGER},
+      course_major = #{courseMajor,jdbcType=VARCHAR},
+      course_examination_method = #{courseExaminationMethod,jdbcType=VARCHAR},
+      course_specific_method = #{courseSpecificMethod,jdbcType=VARCHAR},
+      course_advanced_placement = #{courseAdvancedPlacement,jdbcType=VARCHAR},
+      course_teacher = #{courseTeacher,jdbcType=INTEGER}
+    where course_name = #{courseName,jdbcType=VARCHAR}
+  </update>
+
+  <select id="select" parameterType="integer" resultType="String">
+    select course_name from course where #{teacherNum}=course_teacher
+  </select>
+</mapper>

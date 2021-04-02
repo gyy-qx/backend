@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.TeacherDao">
+  <resultMap id="BaseResultMap" type="com.example.backend.model.Teacher">
+    <id column="teacher_number" jdbcType="INTEGER" property="teacherNumber" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="teacher_sex" jdbcType="VARCHAR" property="teacherSex" />
+    <result column="teacher_professional_title" jdbcType="VARCHAR" property="teacherProfessionalTitle" />
+    <result column="teacher_education" jdbcType="VARCHAR" property="teacherEducation" />
+    <result column="teacher_research" jdbcType="VARCHAR" property="teacherResearch" />
+    <result column="teacher_tel" jdbcType="VARCHAR" property="teacherTel" />
+    <result column="teacher_email" jdbcType="VARCHAR" property="teacherEmail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    teacher_number, teacher_name, teacher_sex, teacher_professional_title, teacher_education,
+    teacher_research, teacher_tel, teacher_email
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from teacher
+    where teacher_number = #{teacherNumber,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from teacher
+    where teacher_number = #{teacherNumber,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.backend.model.Teacher">
+    insert into teacher (teacher_number,teacher_name, teacher_sex, teacher_professional_title,
+      teacher_education, teacher_research, teacher_tel,
+      teacher_email)
+    values (#{teacherNumber,jdbcType=INTEGER},#{teacherName,jdbcType=VARCHAR}, #{teacherSex,jdbcType=VARCHAR}, #{teacherProfessionalTitle,jdbcType=VARCHAR},
+      #{teacherEducation,jdbcType=VARCHAR}, #{teacherResearch,jdbcType=VARCHAR}, #{teacherTel,jdbcType=VARCHAR},
+      #{teacherEmail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="teacher_number" keyProperty="teacherNumber" parameterType="com.example.backend.model.Teacher" useGeneratedKeys="true">
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teacherName != null">
+        teacher_name,
+      </if>
+      <if test="teacherSex != null">
+        teacher_sex,
+      </if>
+      <if test="teacherProfessionalTitle != null">
+        teacher_professional_title,
+      </if>
+      <if test="teacherEducation != null">
+        teacher_education,
+      </if>
+      <if test="teacherResearch != null">
+        teacher_research,
+      </if>
+      <if test="teacherTel != null">
+        teacher_tel,
+      </if>
+      <if test="teacherEmail != null">
+        teacher_email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teacherName != null">
+        #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherSex != null">
+        #{teacherSex,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherProfessionalTitle != null">
+        #{teacherProfessionalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherEducation != null">
+        #{teacherEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherResearch != null">
+        #{teacherResearch,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherTel != null">
+        #{teacherTel,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherEmail != null">
+        #{teacherEmail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.Teacher">
+    update teacher
+    <set>
+      <if test="teacherName != null">
+        teacher_name = #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherSex != null">
+        teacher_sex = #{teacherSex,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherProfessionalTitle != null">
+        teacher_professional_title = #{teacherProfessionalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherEducation != null">
+        teacher_education = #{teacherEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherResearch != null">
+        teacher_research = #{teacherResearch,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherTel != null">
+        teacher_tel = #{teacherTel,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherEmail != null">
+        teacher_email = #{teacherEmail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where teacher_number = #{teacherNumber,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.backend.model.Teacher">
+    update teacher
+    set teacher_name = #{teacherName,jdbcType=VARCHAR},
+      teacher_sex = #{teacherSex,jdbcType=VARCHAR},
+      teacher_professional_title = #{teacherProfessionalTitle,jdbcType=VARCHAR},
+      teacher_education = #{teacherEducation,jdbcType=VARCHAR},
+      teacher_research = #{teacherResearch,jdbcType=VARCHAR},
+      teacher_tel = #{teacherTel,jdbcType=VARCHAR},
+      teacher_email = #{teacherEmail,jdbcType=VARCHAR}
+    where teacher_number = #{teacherNumber,jdbcType=INTEGER}
+  </update>
+</mapper>

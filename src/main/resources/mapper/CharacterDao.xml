@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.CharacterDao">
+  <resultMap id="BaseResultMap" type="com.example.backend.model.Character">
+    <id column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="course_target_one" jdbcType="VARCHAR" property="courseTargetOne" />
+    <result column="course_target_two" jdbcType="VARCHAR" property="courseTargetTwo" />
+    <result column="course_target_three" jdbcType="VARCHAR" property="courseTargetThree" />
+    <result column="course_target_four" jdbcType="VARCHAR" property="courseTargetFour" />
+    <result column="course_target_five" jdbcType="VARCHAR" property="courseTargetFive" />
+    <result column="course_requirement_one" jdbcType="VARCHAR" property="courseRequirementOne" />
+    <result column="course_requirement_two" jdbcType="VARCHAR" property="courseRequirementTwo" />
+    <result column="course_requirement_three" jdbcType="VARCHAR" property="courseRequirementThree" />
+    <result column="course_requirement_four" jdbcType="VARCHAR" property="courseRequirementFour" />
+    <result column="course_requirement_five" jdbcType="VARCHAR" property="courseRequirementFive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    course_name, course_target_one, course_target_two, course_target_three, course_target_four, 
+    course_target_five, course_requirement_one, course_requirement_two, course_requirement_three, 
+    course_requirement_four, course_requirement_five
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from character
+    where course_name = #{courseName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from character
+    where course_name = #{courseName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="course_name" keyProperty="courseName" parameterType="com.example.backend.model.Character" useGeneratedKeys="true">
+    insert into character (course_target_one, course_target_two, 
+      course_target_three, course_target_four, course_target_five, 
+      course_requirement_one, course_requirement_two, 
+      course_requirement_three, course_requirement_four, 
+      course_requirement_five)
+    values (#{courseTargetOne,jdbcType=VARCHAR}, #{courseTargetTwo,jdbcType=VARCHAR}, 
+      #{courseTargetThree,jdbcType=VARCHAR}, #{courseTargetFour,jdbcType=VARCHAR}, #{courseTargetFive,jdbcType=VARCHAR}, 
+      #{courseRequirementOne,jdbcType=VARCHAR}, #{courseRequirementTwo,jdbcType=VARCHAR}, 
+      #{courseRequirementThree,jdbcType=VARCHAR}, #{courseRequirementFour,jdbcType=VARCHAR}, 
+      #{courseRequirementFive,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="course_name" keyProperty="courseName" parameterType="com.example.backend.model.Character" useGeneratedKeys="true">
+    insert into character
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseTargetOne != null">
+        course_target_one,
+      </if>
+      <if test="courseTargetTwo != null">
+        course_target_two,
+      </if>
+      <if test="courseTargetThree != null">
+        course_target_three,
+      </if>
+      <if test="courseTargetFour != null">
+        course_target_four,
+      </if>
+      <if test="courseTargetFive != null">
+        course_target_five,
+      </if>
+      <if test="courseRequirementOne != null">
+        course_requirement_one,
+      </if>
+      <if test="courseRequirementTwo != null">
+        course_requirement_two,
+      </if>
+      <if test="courseRequirementThree != null">
+        course_requirement_three,
+      </if>
+      <if test="courseRequirementFour != null">
+        course_requirement_four,
+      </if>
+      <if test="courseRequirementFive != null">
+        course_requirement_five,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseTargetOne != null">
+        #{courseTargetOne,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTargetTwo != null">
+        #{courseTargetTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTargetThree != null">
+        #{courseTargetThree,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTargetFour != null">
+        #{courseTargetFour,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTargetFive != null">
+        #{courseTargetFive,jdbcType=VARCHAR},
+      </if>
+      <if test="courseRequirementOne != null">
+        #{courseRequirementOne,jdbcType=VARCHAR},
+      </if>
+      <if test="courseRequirementTwo != null">
+        #{courseRequirementTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="courseRequirementThree != null">
+        #{courseRequirementThree,jdbcType=VARCHAR},
+      </if>
+      <if test="courseRequirementFour != null">
+        #{courseRequirementFour,jdbcType=VARCHAR},
+      </if>
+      <if test="courseRequirementFive != null">
+        #{courseRequirementFive,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.Character">
+    update character
+    <set>
+      <if test="courseTargetOne != null">
+        course_target_one = #{courseTargetOne,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTargetTwo != null">
+        course_target_two = #{courseTargetTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTargetThree != null">
+        course_target_three = #{courseTargetThree,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTargetFour != null">
+        course_target_four = #{courseTargetFour,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTargetFive != null">
+        course_target_five = #{courseTargetFive,jdbcType=VARCHAR},
+      </if>
+      <if test="courseRequirementOne != null">
+        course_requirement_one = #{courseRequirementOne,jdbcType=VARCHAR},
+      </if>
+      <if test="courseRequirementTwo != null">
+        course_requirement_two = #{courseRequirementTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="courseRequirementThree != null">
+        course_requirement_three = #{courseRequirementThree,jdbcType=VARCHAR},
+      </if>
+      <if test="courseRequirementFour != null">
+        course_requirement_four = #{courseRequirementFour,jdbcType=VARCHAR},
+      </if>
+      <if test="courseRequirementFive != null">
+        course_requirement_five = #{courseRequirementFive,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where course_name = #{courseName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.backend.model.Character">
+    update character
+    set course_target_one = #{courseTargetOne,jdbcType=VARCHAR},
+      course_target_two = #{courseTargetTwo,jdbcType=VARCHAR},
+      course_target_three = #{courseTargetThree,jdbcType=VARCHAR},
+      course_target_four = #{courseTargetFour,jdbcType=VARCHAR},
+      course_target_five = #{courseTargetFive,jdbcType=VARCHAR},
+      course_requirement_one = #{courseRequirementOne,jdbcType=VARCHAR},
+      course_requirement_two = #{courseRequirementTwo,jdbcType=VARCHAR},
+      course_requirement_three = #{courseRequirementThree,jdbcType=VARCHAR},
+      course_requirement_four = #{courseRequirementFour,jdbcType=VARCHAR},
+      course_requirement_five = #{courseRequirementFive,jdbcType=VARCHAR}
+    where course_name = #{courseName,jdbcType=VARCHAR}
+  </update>
+</mapper>

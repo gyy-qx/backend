@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.TargetDao">
+  <resultMap id="BaseResultMap" type="com.example.backend.model.Target">
+    <id column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="course_weight_one" jdbcType="FLOAT" property="courseWeightOne" />
+    <result column="course_weight_two" jdbcType="FLOAT" property="courseWeightTwo" />
+    <result column="course_weight_three" jdbcType="FLOAT" property="courseWeightThree" />
+    <result column="course_weight_four" jdbcType="FLOAT" property="courseWeightFour" />
+    <result column="course_weight_five" jdbcType="FLOAT" property="courseWeightFive" />
+    <result column="course_ordinary_target_score" jdbcType="FLOAT" property="courseOrdinaryTargetScore" />
+    <result column="course_experiment_target_score" jdbcType="FLOAT" property="courseExperimentTargetScore" />
+    <result column="course_ending_target_score" jdbcType="FLOAT" property="courseEndingTargetScore" />
+    <result column="ordinary_one_target_score" jdbcType="FLOAT" property="ordinaryOneTargetScore" />
+    <result column="experiment_one_target_score" jdbcType="FLOAT" property="experimentOneTargetScore" />
+    <result column="ending_one_target_score" jdbcType="FLOAT" property="endingOneTargetScore" />
+    <result column="ordinary_two_target_score" jdbcType="FLOAT" property="ordinaryTwoTargetScore" />
+    <result column="experiment_two_target_score" jdbcType="FLOAT" property="experimentTwoTargetScore" />
+    <result column="ending_two_target_score" jdbcType="FLOAT" property="endingTwoTargetScore" />
+    <result column="ordinary_three_target_score" jdbcType="FLOAT" property="ordinaryThreeTargetScore" />
+    <result column="experiment_three_target_score" jdbcType="FLOAT" property="experimentThreeTargetScore" />
+    <result column="ending_three_target_score" jdbcType="FLOAT" property="endingThreeTargetScore" />
+    <result column="ordinary_four_target_score" jdbcType="FLOAT" property="ordinaryFourTargetScore" />
+    <result column="experiment_four_target_score" jdbcType="FLOAT" property="experimentFourTargetScore" />
+    <result column="ending_four_target_score" jdbcType="FLOAT" property="endingFourTargetScore" />
+    <result column="ordinary_five_target_score" jdbcType="FLOAT" property="ordinaryFiveTargetScore" />
+    <result column="experiment_five_target_score" jdbcType="FLOAT" property="experimentFiveTargetScore" />
+    <result column="ending_five_target_score" jdbcType="FLOAT" property="endingFiveTargetScore" />
+    <result column="ordinary_one_distributed_score" jdbcType="FLOAT" property="ordinaryOneDistributedScore" />
+    <result column="experiment_one_distributed_score" jdbcType="FLOAT" property="experimentOneDistributedScore" />
+    <result column="ending_one_distributed_score" jdbcType="FLOAT" property="endingOneDistributedScore" />
+    <result column="ordinary_two_distributed_score" jdbcType="FLOAT" property="ordinaryTwoDistributedScore" />
+    <result column="experiment_two_distributed_score" jdbcType="FLOAT" property="experimentTwoDistributedScore" />
+    <result column="ending_two_distributed_score" jdbcType="FLOAT" property="endingTwoDistributedScore" />
+    <result column="ordinary_three_distributed_score" jdbcType="FLOAT" property="ordinaryThreeDistributedScore" />
+    <result column="experiment_three_distributed_score" jdbcType="FLOAT" property="experimentThreeDistributedScore" />
+    <result column="ending_three_distributed_score" jdbcType="FLOAT" property="endingThreeDistributedScore" />
+    <result column="ordinary_four_distributed_score" jdbcType="FLOAT" property="ordinaryFourDistributedScore" />
+    <result column="experiment_four_distributed_score" jdbcType="FLOAT" property="experimentFourDistributedScore" />
+    <result column="ending_four_distributed_score" jdbcType="FLOAT" property="endingFourDistributedScore" />
+    <result column="ordinary_five_distributed_score" jdbcType="FLOAT" property="ordinaryFiveDistributedScore" />
+    <result column="experiment_five_distributed_score" jdbcType="FLOAT" property="experimentFiveDistributedScore" />
+    <result column="ending_five_distributed_score" jdbcType="FLOAT" property="endingFiveDistributedScore" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    course_name, course_weight_one, course_weight_two, course_weight_three, course_weight_four, 
+    course_weight_five, course_ordinary_target_score, course_experiment_target_score, 
+    course_ending_target_score, ordinary_one_target_score, experiment_one_target_score, 
+    ending_one_target_score, ordinary_two_target_score, experiment_two_target_score, 
+    ending_two_target_score, ordinary_three_target_score, experiment_three_target_score, 
+    ending_three_target_score, ordinary_four_target_score, experiment_four_target_score, 
+    ending_four_target_score, ordinary_five_target_score, experiment_five_target_score, 
+    ending_five_target_score, ordinary_one_distributed_score, experiment_one_distributed_score, 
+    ending_one_distributed_score, ordinary_two_distributed_score, experiment_two_distributed_score, 
+    ending_two_distributed_score, ordinary_three_distributed_score, experiment_three_distributed_score, 
+    ending_three_distributed_score, ordinary_four_distributed_score, experiment_four_distributed_score, 
+    ending_four_distributed_score, ordinary_five_distributed_score, experiment_five_distributed_score, 
+    ending_five_distributed_score
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from target
+    where course_name = #{courseName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from target
+    where course_name = #{courseName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="course_name" keyProperty="courseName" parameterType="com.example.backend.model.Target" useGeneratedKeys="true">
+    insert into target (course_weight_one, course_weight_two, course_weight_three, 
+      course_weight_four, course_weight_five, course_ordinary_target_score, 
+      course_experiment_target_score, course_ending_target_score, 
+      ordinary_one_target_score, experiment_one_target_score, 
+      ending_one_target_score, ordinary_two_target_score, 
+      experiment_two_target_score, ending_two_target_score, 
+      ordinary_three_target_score, experiment_three_target_score, 
+      ending_three_target_score, ordinary_four_target_score, 
+      experiment_four_target_score, ending_four_target_score, 
+      ordinary_five_target_score, experiment_five_target_score, 
+      ending_five_target_score, ordinary_one_distributed_score, 
+      experiment_one_distributed_score, ending_one_distributed_score, 
+      ordinary_two_distributed_score, experiment_two_distributed_score, 
+      ending_two_distributed_score, ordinary_three_distributed_score, 
+      experiment_three_distributed_score, ending_three_distributed_score, 
+      ordinary_four_distributed_score, experiment_four_distributed_score, 
+      ending_four_distributed_score, ordinary_five_distributed_score, 
+      experiment_five_distributed_score, ending_five_distributed_score
+      )
+    values (#{courseWeightOne,jdbcType=FLOAT}, #{courseWeightTwo,jdbcType=FLOAT}, #{courseWeightThree,jdbcType=FLOAT}, 
+      #{courseWeightFour,jdbcType=FLOAT}, #{courseWeightFive,jdbcType=FLOAT}, #{courseOrdinaryTargetScore,jdbcType=FLOAT}, 
+      #{courseExperimentTargetScore,jdbcType=FLOAT}, #{courseEndingTargetScore,jdbcType=FLOAT}, 
+      #{ordinaryOneTargetScore,jdbcType=FLOAT}, #{experimentOneTargetScore,jdbcType=FLOAT}, 
+      #{endingOneTargetScore,jdbcType=FLOAT}, #{ordinaryTwoTargetScore,jdbcType=FLOAT}, 
+      #{experimentTwoTargetScore,jdbcType=FLOAT}, #{endingTwoTargetScore,jdbcType=FLOAT}, 
+      #{ordinaryThreeTargetScore,jdbcType=FLOAT}, #{experimentThreeTargetScore,jdbcType=FLOAT}, 
+      #{endingThreeTargetScore,jdbcType=FLOAT}, #{ordinaryFourTargetScore,jdbcType=FLOAT}, 
+      #{experimentFourTargetScore,jdbcType=FLOAT}, #{endingFourTargetScore,jdbcType=FLOAT}, 
+      #{ordinaryFiveTargetScore,jdbcType=FLOAT}, #{experimentFiveTargetScore,jdbcType=FLOAT}, 
+      #{endingFiveTargetScore,jdbcType=FLOAT}, #{ordinaryOneDistributedScore,jdbcType=FLOAT}, 
+      #{experimentOneDistributedScore,jdbcType=FLOAT}, #{endingOneDistributedScore,jdbcType=FLOAT}, 
+      #{ordinaryTwoDistributedScore,jdbcType=FLOAT}, #{experimentTwoDistributedScore,jdbcType=FLOAT}, 
+      #{endingTwoDistributedScore,jdbcType=FLOAT}, #{ordinaryThreeDistributedScore,jdbcType=FLOAT}, 
+      #{experimentThreeDistributedScore,jdbcType=FLOAT}, #{endingThreeDistributedScore,jdbcType=FLOAT}, 
+      #{ordinaryFourDistributedScore,jdbcType=FLOAT}, #{experimentFourDistributedScore,jdbcType=FLOAT}, 
+      #{endingFourDistributedScore,jdbcType=FLOAT}, #{ordinaryFiveDistributedScore,jdbcType=FLOAT}, 
+      #{experimentFiveDistributedScore,jdbcType=FLOAT}, #{endingFiveDistributedScore,jdbcType=FLOAT}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="course_name" keyProperty="courseName" parameterType="com.example.backend.model.Target" useGeneratedKeys="true">
+    insert into target
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseWeightOne != null">
+        course_weight_one,
+      </if>
+      <if test="courseWeightTwo != null">
+        course_weight_two,
+      </if>
+      <if test="courseWeightThree != null">
+        course_weight_three,
+      </if>
+      <if test="courseWeightFour != null">
+        course_weight_four,
+      </if>
+      <if test="courseWeightFive != null">
+        course_weight_five,
+      </if>
+      <if test="courseOrdinaryTargetScore != null">
+        course_ordinary_target_score,
+      </if>
+      <if test="courseExperimentTargetScore != null">
+        course_experiment_target_score,
+      </if>
+      <if test="courseEndingTargetScore != null">
+        course_ending_target_score,
+      </if>
+      <if test="ordinaryOneTargetScore != null">
+        ordinary_one_target_score,
+      </if>
+      <if test="experimentOneTargetScore != null">
+        experiment_one_target_score,
+      </if>
+      <if test="endingOneTargetScore != null">
+        ending_one_target_score,
+      </if>
+      <if test="ordinaryTwoTargetScore != null">
+        ordinary_two_target_score,
+      </if>
+      <if test="experimentTwoTargetScore != null">
+        experiment_two_target_score,
+      </if>
+      <if test="endingTwoTargetScore != null">
+        ending_two_target_score,
+      </if>
+      <if test="ordinaryThreeTargetScore != null">
+        ordinary_three_target_score,
+      </if>
+      <if test="experimentThreeTargetScore != null">
+        experiment_three_target_score,
+      </if>
+      <if test="endingThreeTargetScore != null">
+        ending_three_target_score,
+      </if>
+      <if test="ordinaryFourTargetScore != null">
+        ordinary_four_target_score,
+      </if>
+      <if test="experimentFourTargetScore != null">
+        experiment_four_target_score,
+      </if>
+      <if test="endingFourTargetScore != null">
+        ending_four_target_score,
+      </if>
+      <if test="ordinaryFiveTargetScore != null">
+        ordinary_five_target_score,
+      </if>
+      <if test="experimentFiveTargetScore != null">
+        experiment_five_target_score,
+      </if>
+      <if test="endingFiveTargetScore != null">
+        ending_five_target_score,
+      </if>
+      <if test="ordinaryOneDistributedScore != null">
+        ordinary_one_distributed_score,
+      </if>
+      <if test="experimentOneDistributedScore != null">
+        experiment_one_distributed_score,
+      </if>
+      <if test="endingOneDistributedScore != null">
+        ending_one_distributed_score,
+      </if>
+      <if test="ordinaryTwoDistributedScore != null">
+        ordinary_two_distributed_score,
+      </if>
+      <if test="experimentTwoDistributedScore != null">
+        experiment_two_distributed_score,
+      </if>
+      <if test="endingTwoDistributedScore != null">
+        ending_two_distributed_score,
+      </if>
+      <if test="ordinaryThreeDistributedScore != null">
+        ordinary_three_distributed_score,
+      </if>
+      <if test="experimentThreeDistributedScore != null">
+        experiment_three_distributed_score,
+      </if>
+      <if test="endingThreeDistributedScore != null">
+        ending_three_distributed_score,
+      </if>
+      <if test="ordinaryFourDistributedScore != null">
+        ordinary_four_distributed_score,
+      </if>
+      <if test="experimentFourDistributedScore != null">
+        experiment_four_distributed_score,
+      </if>
+      <if test="endingFourDistributedScore != null">
+        ending_four_distributed_score,
+      </if>
+      <if test="ordinaryFiveDistributedScore != null">
+        ordinary_five_distributed_score,
+      </if>
+      <if test="experimentFiveDistributedScore != null">
+        experiment_five_distributed_score,
+      </if>
+      <if test="endingFiveDistributedScore != null">
+        ending_five_distributed_score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseWeightOne != null">
+        #{courseWeightOne,jdbcType=FLOAT},
+      </if>
+      <if test="courseWeightTwo != null">
+        #{courseWeightTwo,jdbcType=FLOAT},
+      </if>
+      <if test="courseWeightThree != null">
+        #{courseWeightThree,jdbcType=FLOAT},
+      </if>
+      <if test="courseWeightFour != null">
+        #{courseWeightFour,jdbcType=FLOAT},
+      </if>
+      <if test="courseWeightFive != null">
+        #{courseWeightFive,jdbcType=FLOAT},
+      </if>
+      <if test="courseOrdinaryTargetScore != null">
+        #{courseOrdinaryTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseExperimentTargetScore != null">
+        #{courseExperimentTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseEndingTargetScore != null">
+        #{courseEndingTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryOneTargetScore != null">
+        #{ordinaryOneTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentOneTargetScore != null">
+        #{experimentOneTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingOneTargetScore != null">
+        #{endingOneTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryTwoTargetScore != null">
+        #{ordinaryTwoTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentTwoTargetScore != null">
+        #{experimentTwoTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingTwoTargetScore != null">
+        #{endingTwoTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryThreeTargetScore != null">
+        #{ordinaryThreeTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentThreeTargetScore != null">
+        #{experimentThreeTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingThreeTargetScore != null">
+        #{endingThreeTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryFourTargetScore != null">
+        #{ordinaryFourTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentFourTargetScore != null">
+        #{experimentFourTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingFourTargetScore != null">
+        #{endingFourTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryFiveTargetScore != null">
+        #{ordinaryFiveTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentFiveTargetScore != null">
+        #{experimentFiveTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingFiveTargetScore != null">
+        #{endingFiveTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryOneDistributedScore != null">
+        #{ordinaryOneDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentOneDistributedScore != null">
+        #{experimentOneDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingOneDistributedScore != null">
+        #{endingOneDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryTwoDistributedScore != null">
+        #{ordinaryTwoDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentTwoDistributedScore != null">
+        #{experimentTwoDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingTwoDistributedScore != null">
+        #{endingTwoDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryThreeDistributedScore != null">
+        #{ordinaryThreeDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentThreeDistributedScore != null">
+        #{experimentThreeDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingThreeDistributedScore != null">
+        #{endingThreeDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryFourDistributedScore != null">
+        #{ordinaryFourDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentFourDistributedScore != null">
+        #{experimentFourDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingFourDistributedScore != null">
+        #{endingFourDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryFiveDistributedScore != null">
+        #{ordinaryFiveDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentFiveDistributedScore != null">
+        #{experimentFiveDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingFiveDistributedScore != null">
+        #{endingFiveDistributedScore,jdbcType=FLOAT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.Target">
+    update target
+    <set>
+      <if test="courseWeightOne != null">
+        course_weight_one = #{courseWeightOne,jdbcType=FLOAT},
+      </if>
+      <if test="courseWeightTwo != null">
+        course_weight_two = #{courseWeightTwo,jdbcType=FLOAT},
+      </if>
+      <if test="courseWeightThree != null">
+        course_weight_three = #{courseWeightThree,jdbcType=FLOAT},
+      </if>
+      <if test="courseWeightFour != null">
+        course_weight_four = #{courseWeightFour,jdbcType=FLOAT},
+      </if>
+      <if test="courseWeightFive != null">
+        course_weight_five = #{courseWeightFive,jdbcType=FLOAT},
+      </if>
+      <if test="courseOrdinaryTargetScore != null">
+        course_ordinary_target_score = #{courseOrdinaryTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseExperimentTargetScore != null">
+        course_experiment_target_score = #{courseExperimentTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseEndingTargetScore != null">
+        course_ending_target_score = #{courseEndingTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryOneTargetScore != null">
+        ordinary_one_target_score = #{ordinaryOneTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentOneTargetScore != null">
+        experiment_one_target_score = #{experimentOneTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingOneTargetScore != null">
+        ending_one_target_score = #{endingOneTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryTwoTargetScore != null">
+        ordinary_two_target_score = #{ordinaryTwoTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentTwoTargetScore != null">
+        experiment_two_target_score = #{experimentTwoTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingTwoTargetScore != null">
+        ending_two_target_score = #{endingTwoTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryThreeTargetScore != null">
+        ordinary_three_target_score = #{ordinaryThreeTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentThreeTargetScore != null">
+        experiment_three_target_score = #{experimentThreeTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingThreeTargetScore != null">
+        ending_three_target_score = #{endingThreeTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryFourTargetScore != null">
+        ordinary_four_target_score = #{ordinaryFourTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentFourTargetScore != null">
+        experiment_four_target_score = #{experimentFourTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingFourTargetScore != null">
+        ending_four_target_score = #{endingFourTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryFiveTargetScore != null">
+        ordinary_five_target_score = #{ordinaryFiveTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentFiveTargetScore != null">
+        experiment_five_target_score = #{experimentFiveTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingFiveTargetScore != null">
+        ending_five_target_score = #{endingFiveTargetScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryOneDistributedScore != null">
+        ordinary_one_distributed_score = #{ordinaryOneDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentOneDistributedScore != null">
+        experiment_one_distributed_score = #{experimentOneDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingOneDistributedScore != null">
+        ending_one_distributed_score = #{endingOneDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryTwoDistributedScore != null">
+        ordinary_two_distributed_score = #{ordinaryTwoDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentTwoDistributedScore != null">
+        experiment_two_distributed_score = #{experimentTwoDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingTwoDistributedScore != null">
+        ending_two_distributed_score = #{endingTwoDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryThreeDistributedScore != null">
+        ordinary_three_distributed_score = #{ordinaryThreeDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentThreeDistributedScore != null">
+        experiment_three_distributed_score = #{experimentThreeDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingThreeDistributedScore != null">
+        ending_three_distributed_score = #{endingThreeDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryFourDistributedScore != null">
+        ordinary_four_distributed_score = #{ordinaryFourDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentFourDistributedScore != null">
+        experiment_four_distributed_score = #{experimentFourDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingFourDistributedScore != null">
+        ending_four_distributed_score = #{endingFourDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="ordinaryFiveDistributedScore != null">
+        ordinary_five_distributed_score = #{ordinaryFiveDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="experimentFiveDistributedScore != null">
+        experiment_five_distributed_score = #{experimentFiveDistributedScore,jdbcType=FLOAT},
+      </if>
+      <if test="endingFiveDistributedScore != null">
+        ending_five_distributed_score = #{endingFiveDistributedScore,jdbcType=FLOAT},
+      </if>
+    </set>
+    where course_name = #{courseName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.backend.model.Target">
+    update target
+    set course_weight_one = #{courseWeightOne,jdbcType=FLOAT},
+      course_weight_two = #{courseWeightTwo,jdbcType=FLOAT},
+      course_weight_three = #{courseWeightThree,jdbcType=FLOAT},
+      course_weight_four = #{courseWeightFour,jdbcType=FLOAT},
+      course_weight_five = #{courseWeightFive,jdbcType=FLOAT},
+      course_ordinary_target_score = #{courseOrdinaryTargetScore,jdbcType=FLOAT},
+      course_experiment_target_score = #{courseExperimentTargetScore,jdbcType=FLOAT},
+      course_ending_target_score = #{courseEndingTargetScore,jdbcType=FLOAT},
+      ordinary_one_target_score = #{ordinaryOneTargetScore,jdbcType=FLOAT},
+      experiment_one_target_score = #{experimentOneTargetScore,jdbcType=FLOAT},
+      ending_one_target_score = #{endingOneTargetScore,jdbcType=FLOAT},
+      ordinary_two_target_score = #{ordinaryTwoTargetScore,jdbcType=FLOAT},
+      experiment_two_target_score = #{experimentTwoTargetScore,jdbcType=FLOAT},
+      ending_two_target_score = #{endingTwoTargetScore,jdbcType=FLOAT},
+      ordinary_three_target_score = #{ordinaryThreeTargetScore,jdbcType=FLOAT},
+      experiment_three_target_score = #{experimentThreeTargetScore,jdbcType=FLOAT},
+      ending_three_target_score = #{endingThreeTargetScore,jdbcType=FLOAT},
+      ordinary_four_target_score = #{ordinaryFourTargetScore,jdbcType=FLOAT},
+      experiment_four_target_score = #{experimentFourTargetScore,jdbcType=FLOAT},
+      ending_four_target_score = #{endingFourTargetScore,jdbcType=FLOAT},
+      ordinary_five_target_score = #{ordinaryFiveTargetScore,jdbcType=FLOAT},
+      experiment_five_target_score = #{experimentFiveTargetScore,jdbcType=FLOAT},
+      ending_five_target_score = #{endingFiveTargetScore,jdbcType=FLOAT},
+      ordinary_one_distributed_score = #{ordinaryOneDistributedScore,jdbcType=FLOAT},
+      experiment_one_distributed_score = #{experimentOneDistributedScore,jdbcType=FLOAT},
+      ending_one_distributed_score = #{endingOneDistributedScore,jdbcType=FLOAT},
+      ordinary_two_distributed_score = #{ordinaryTwoDistributedScore,jdbcType=FLOAT},
+      experiment_two_distributed_score = #{experimentTwoDistributedScore,jdbcType=FLOAT},
+      ending_two_distributed_score = #{endingTwoDistributedScore,jdbcType=FLOAT},
+      ordinary_three_distributed_score = #{ordinaryThreeDistributedScore,jdbcType=FLOAT},
+      experiment_three_distributed_score = #{experimentThreeDistributedScore,jdbcType=FLOAT},
+      ending_three_distributed_score = #{endingThreeDistributedScore,jdbcType=FLOAT},
+      ordinary_four_distributed_score = #{ordinaryFourDistributedScore,jdbcType=FLOAT},
+      experiment_four_distributed_score = #{experimentFourDistributedScore,jdbcType=FLOAT},
+      ending_four_distributed_score = #{endingFourDistributedScore,jdbcType=FLOAT},
+      ordinary_five_distributed_score = #{ordinaryFiveDistributedScore,jdbcType=FLOAT},
+      experiment_five_distributed_score = #{experimentFiveDistributedScore,jdbcType=FLOAT},
+      ending_five_distributed_score = #{endingFiveDistributedScore,jdbcType=FLOAT}
+    where course_name = #{courseName,jdbcType=VARCHAR}
+  </update>
+</mapper>
