@@ -16,9 +16,13 @@ import java.io.Serializable;
 @Component
 @Data
 public class Result implements Serializable {
+    private Integer number;
+
+    private String studentClass;
+
     private Integer studentSno;
 
-    private String courseNume;
+    private String courseName;
 
     private Double courseOneOrdinaryScore;
 

@@ -2,7 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.model.Login;
 import com.example.backend.model.Teacher;
-import com.example.backend.service.DepartmentService;
+import com.example.backend.service.MyAccountService;
 import com.example.backend.service.LoginService;
 import com.example.backend.service.TeacherService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -20,7 +20,7 @@ import java.util.Map;
 @RestController
 public class RegisterController {
     @Autowired
-    DepartmentService departmentService;
+    MyAccountService myAccountService;
     @Autowired
     TeacherService teacherService;
     @Autowired
@@ -28,7 +28,7 @@ public class RegisterController {
 
     @RequestMapping(path = "/created")
     public List<String> getResearchList() {
-        List<String> researchList = departmentService.getResearchList();
+        List<String> researchList = myAccountService.getResearchList();
         return researchList;
     }
 
@@ -38,7 +38,7 @@ public class RegisterController {
         Map<String, Object> map = jsonParser.parseMap(json);
         String research_name = (String) map.get("researchName");
         System.out.println(research_name);
-        Integer researchChairman = departmentService.selectChairman(research_name);
+        Integer researchChairman = myAccountService.selectChairman(research_name);
         System.out.println(researchChairman);
         return researchChairman;
     }
@@ -52,17 +52,15 @@ public class RegisterController {
 
         Login loginPerson = objectMapper.readValue(loginJson, Login.class);
         Teacher teacher = objectMapper.readValue(teacherJson, Teacher.class);
+        System.out.println(teacher);
 
-        loginService.insert(loginPerson);
-        teacherService.insert(teacher);
-        return json;
+        int loginResult=loginService.insert(loginPerson);
+        int teacherResult=teacherService.insert(teacher);
 
-//        int result = logisticsDemandService.insertdemand(demand,demand.getOrders());
-//
-//        if(result>0){
-//            return Result.success("保存成功！");
-//        }else{
-//            return Result.error(501,"保存失败！");
-//        }
+        if(loginResult>0&&teacherResult>0){
+            return "注册成功";
+       }else{
+            return "注册失败";
+        }
     }
 }

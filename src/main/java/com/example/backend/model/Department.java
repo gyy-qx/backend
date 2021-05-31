@@ -26,7 +26,11 @@ public class Department implements Serializable {
      */
     private Integer researchChairman;
 
+    private String chairmanName;
+
     private String researchTel;
+
+    private String researchMajor;
 
     private static final long serialVersionUID = 1L;
 }

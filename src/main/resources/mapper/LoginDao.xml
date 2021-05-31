@@ -5,12 +5,13 @@
     <id column="user" jdbcType="INTEGER" property="user" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="path_img" jdbcType="VARCHAR" property="pathImg" />
   </resultMap>
   <sql id="Base_Column_List">
-    `user`, `password`, id
+    `user`, `password`, id, path_img
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.example.backend.model.Login">
-    select
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
     <include refid="Base_Column_List" />
     from login
     where `user` = #{user,jdbcType=INTEGER}
@@ -19,8 +20,11 @@
     delete from login
     where `user` = #{user,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.backend.model.Login">
-    insert into login(`user`,`password`,`id`) values (#{user,jdbcType=INTEGER},#{password,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR})
+  <insert id="insert" keyColumn="user" keyProperty="user" parameterType="com.example.backend.model.Login" useGeneratedKeys="true">
+    insert into login (`password`, id, path_img
+      )
+    values (#{password,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{pathImg,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="user" keyProperty="user" parameterType="com.example.backend.model.Login" useGeneratedKeys="true">
     insert into login
@@ -31,6 +35,9 @@
       <if test="id != null">
         id,
       </if>
+      <if test="pathImg != null">
+        path_img,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="password != null">
@@ -38,6 +45,9 @@
       </if>
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pathImg != null">
+        #{pathImg,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -50,13 +60,17 @@
       <if test="id != null">
         id = #{id,jdbcType=VARCHAR},
       </if>
+      <if test="pathImg != null">
+        path_img = #{pathImg,jdbcType=VARCHAR},
+      </if>
     </set>
     where `user` = #{user,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.backend.model.Login">
     update login
     set `password` = #{password,jdbcType=VARCHAR},
-      id = #{id,jdbcType=VARCHAR}
+      id = #{id,jdbcType=VARCHAR},
+      path_img = #{pathImg,jdbcType=VARCHAR}
     where `user` = #{user,jdbcType=INTEGER}
   </update>
 </mapper>

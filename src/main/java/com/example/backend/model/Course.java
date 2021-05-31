@@ -18,6 +18,10 @@ import java.io.Serializable;
 public class Course implements Serializable {
     private String courseName;
 
+    private String courseGrade;
+
+    private String courseCover;
+
     private String courseEnglish;
 
     private String courseClassification;
@@ -29,6 +33,8 @@ public class Course implements Serializable {
     private Double courseCredit;
 
     private Integer courseClassHour;
+
+    private String courseApplyMajor;
 
     private String courseMajor;
 

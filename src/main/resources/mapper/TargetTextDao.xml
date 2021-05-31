@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.backend.mapper.CharacterDao">
-  <resultMap id="BaseResultMap" type="com.example.backend.model.Character">
-    <id column="course_name" jdbcType="VARCHAR" property="courseName" />
+<mapper namespace="com.example.backend.mapper.TargetTextDao">
+  <resultMap id="BaseResultMap" type="com.example.backend.model.TargetText">
+    <id column="course_number" jdbcType="INTEGER" property="courseNumber" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="course_grade" jdbcType="VARCHAR" property="courseGrade" />
+    <result column="course_major" jdbcType="VARCHAR" property="courseMajor" />
     <result column="course_target_one" jdbcType="VARCHAR" property="courseTargetOne" />
     <result column="course_target_two" jdbcType="VARCHAR" property="courseTargetTwo" />
     <result column="course_target_three" jdbcType="VARCHAR" property="courseTargetThree" />
@@ -15,35 +18,46 @@
     <result column="course_requirement_five" jdbcType="VARCHAR" property="courseRequirementFive" />
   </resultMap>
   <sql id="Base_Column_List">
-    course_name, course_target_one, course_target_two, course_target_three, course_target_four, 
-    course_target_five, course_requirement_one, course_requirement_two, course_requirement_three, 
-    course_requirement_four, course_requirement_five
+    course_number, course_name, course_grade, course_major, course_target_one, course_target_two,
+    course_target_three, course_target_four, course_target_five, course_requirement_one,
+    course_requirement_two, course_requirement_three, course_requirement_four, course_requirement_five
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
-    from character
-    where course_name = #{courseName,jdbcType=VARCHAR}
+    from target_text
+    where course_name = #{courseName,jdbcType=VARCHAR} and course_grade = #{courseGrade,jdbcType=VARCHAR} and course_major= #{courseMajor,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from character
-    where course_name = #{courseName,jdbcType=VARCHAR}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from target_text
+    where course_number = #{courseNumber,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="course_name" keyProperty="courseName" parameterType="com.example.backend.model.Character" useGeneratedKeys="true">
-    insert into character (course_target_one, course_target_two, 
-      course_target_three, course_target_four, course_target_five, 
-      course_requirement_one, course_requirement_two, 
-      course_requirement_three, course_requirement_four, 
-      course_requirement_five)
-    values (#{courseTargetOne,jdbcType=VARCHAR}, #{courseTargetTwo,jdbcType=VARCHAR}, 
-      #{courseTargetThree,jdbcType=VARCHAR}, #{courseTargetFour,jdbcType=VARCHAR}, #{courseTargetFive,jdbcType=VARCHAR}, 
-      #{courseRequirementOne,jdbcType=VARCHAR}, #{courseRequirementTwo,jdbcType=VARCHAR}, 
-      #{courseRequirementThree,jdbcType=VARCHAR}, #{courseRequirementFour,jdbcType=VARCHAR}, 
-      #{courseRequirementFive,jdbcType=VARCHAR})
+  <insert id="insert" keyColumn="course_number" keyProperty="courseNumber" parameterType="com.example.backend.model.TargetText" useGeneratedKeys="true">
+    insert into target_text (course_name, course_grade, course_major,
+      course_target_one, course_target_two, course_target_three,
+      course_target_four, course_target_five, course_requirement_one,
+      course_requirement_two, course_requirement_three,
+      course_requirement_four, course_requirement_five
+      )
+    values (#{courseName,jdbcType=VARCHAR}, #{courseGrade,jdbcType=VARCHAR}, #{courseMajor,jdbcType=VARCHAR},
+      #{courseTargetOne,jdbcType=VARCHAR}, #{courseTargetTwo,jdbcType=VARCHAR}, #{courseTargetThree,jdbcType=VARCHAR},
+      #{courseTargetFour,jdbcType=VARCHAR}, #{courseTargetFive,jdbcType=VARCHAR}, #{courseRequirementOne,jdbcType=VARCHAR},
+      #{courseRequirementTwo,jdbcType=VARCHAR}, #{courseRequirementThree,jdbcType=VARCHAR},
+      #{courseRequirementFour,jdbcType=VARCHAR}, #{courseRequirementFive,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" keyColumn="course_name" keyProperty="courseName" parameterType="com.example.backend.model.Character" useGeneratedKeys="true">
-    insert into character
+  <insert id="insertSelective" keyColumn="course_number" keyProperty="courseNumber" parameterType="com.example.backend.model.TargetText" useGeneratedKeys="true">
+    insert into target_text
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseName != null">
+        course_name,
+      </if>
+      <if test="courseGrade != null">
+        course_grade,
+      </if>
+      <if test="courseMajor != null">
+        course_major,
+      </if>
       <if test="courseTargetOne != null">
         course_target_one,
       </if>
@@ -76,6 +90,15 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseGrade != null">
+        #{courseGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="courseMajor != null">
+        #{courseMajor,jdbcType=VARCHAR},
+      </if>
       <if test="courseTargetOne != null">
         #{courseTargetOne,jdbcType=VARCHAR},
       </if>
@@ -108,8 +131,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.Character">
-    update character
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.TargetText">
+    update target_text
     <set>
       <if test="courseTargetOne != null">
         course_target_one = #{courseTargetOne,jdbcType=VARCHAR},
@@ -142,11 +165,14 @@
         course_requirement_five = #{courseRequirementFive,jdbcType=VARCHAR},
       </if>
     </set>
-    where course_name = #{courseName,jdbcType=VARCHAR}
+    where course_name = #{courseName,jdbcType=VARCHAR} and course_grade = #{courseGrade,jdbcType=VARCHAR} and course_major= #{courseMajor,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.backend.model.Character">
-    update character
-    set course_target_one = #{courseTargetOne,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.example.backend.model.TargetText">
+    update target_text
+    set course_name = #{courseName,jdbcType=VARCHAR},
+      course_grade = #{courseGrade,jdbcType=VARCHAR},
+      course_major = #{courseMajor,jdbcType=VARCHAR},
+      course_target_one = #{courseTargetOne,jdbcType=VARCHAR},
       course_target_two = #{courseTargetTwo,jdbcType=VARCHAR},
       course_target_three = #{courseTargetThree,jdbcType=VARCHAR},
       course_target_four = #{courseTargetFour,jdbcType=VARCHAR},
@@ -156,6 +182,16 @@
       course_requirement_three = #{courseRequirementThree,jdbcType=VARCHAR},
       course_requirement_four = #{courseRequirementFour,jdbcType=VARCHAR},
       course_requirement_five = #{courseRequirementFive,jdbcType=VARCHAR}
-    where course_name = #{courseName,jdbcType=VARCHAR}
+    where course_number = #{courseNumber,jdbcType=INTEGER}
   </update>
+  <select id="getTargetText" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from target_text
+    where course_name = #{courseName,jdbcType=VARCHAR} and course_major=#{courseMajor,jdbcType=VARCHAR} and course_grade =#{courseGrade,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteCourse" parameterType="string">
+    delete from target_text
+    where course_name = #{courseName,jdbcType=VARCHAR} and course_grade = #{courseGrade,jdbcType=VARCHAR} and course_major= #{courseMajor,jdbcType=VARCHAR}
+  </delete>
 </mapper>

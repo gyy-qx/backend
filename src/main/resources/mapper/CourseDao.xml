@@ -3,48 +3,89 @@
 <mapper namespace="com.example.backend.mapper.CourseDao">
   <resultMap id="BaseResultMap" type="com.example.backend.model.Course">
     <id column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="course_grade" jdbcType="VARCHAR" property="courseGrade" />
+    <result column="course_cover" jdbcType="VARCHAR" property="courseCover" />
     <result column="course_english" jdbcType="VARCHAR" property="courseEnglish" />
     <result column="course_classification" jdbcType="VARCHAR" property="courseClassification" />
     <result column="course_character" jdbcType="VARCHAR" property="courseCharacter" />
     <result column="course_term" jdbcType="VARCHAR" property="courseTerm" />
     <result column="course_credit" jdbcType="FLOAT" property="courseCredit" />
     <result column="course_class_hour" jdbcType="INTEGER" property="courseClassHour" />
+    <result column="course_apply_major" jdbcType="VARCHAR" property="courseApplyMajor" />
     <result column="course_major" jdbcType="VARCHAR" property="courseMajor" />
     <result column="course_examination_method" jdbcType="VARCHAR" property="courseExaminationMethod" />
     <result column="course_specific_method" jdbcType="VARCHAR" property="courseSpecificMethod" />
     <result column="course_advanced_placement" jdbcType="VARCHAR" property="courseAdvancedPlacement" />
     <result column="course_teacher" jdbcType="INTEGER" property="courseTeacher" />
   </resultMap>
+  <resultMap id="GradeResultMap" type="com.example.backend.model.Course">
+    <id column="course_grade" jdbcType="VARCHAR" property="courseGrade" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="course_cover" jdbcType="VARCHAR" property="courseCover" />
+    <result column="course_english" jdbcType="VARCHAR" property="courseEnglish" />
+    <result column="course_classification" jdbcType="VARCHAR" property="courseClassification" />
+    <result column="course_character" jdbcType="VARCHAR" property="courseCharacter" />
+    <result column="course_term" jdbcType="VARCHAR" property="courseTerm" />
+    <result column="course_credit" jdbcType="FLOAT" property="courseCredit" />
+    <result column="course_class_hour" jdbcType="INTEGER" property="courseClassHour" />
+    <result column="course_apply_major" jdbcType="VARCHAR" property="courseApplyMajor" />
+    <result column="course_major" jdbcType="VARCHAR" property="courseMajor" />
+    <result column="course_examination_method" jdbcType="VARCHAR" property="courseExaminationMethod" />
+    <result column="course_specific_method" jdbcType="VARCHAR" property="courseSpecificMethod" />
+    <result column="course_advanced_placement" jdbcType="VARCHAR" property="courseAdvancedPlacement" />
+    <result column="course_teacher" jdbcType="INTEGER" property="courseTeacher" />
+  </resultMap>
+  <resultMap id="nameResultMap" type="com.example.backend.courseDto.CourseClass">
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="course_grade" jdbcType="VARCHAR" property="courseGrade" />
+    <result column="course_major" jdbcType="VARCHAR" property="courseMajor" />
+    <result column="course_cover" jdbcType="VARCHAR" property="courseCover" />
+  </resultMap>
   <sql id="Base_Column_List">
-    course_name, course_english, course_classification, course_character, course_term,
-    course_credit, course_class_hour, course_major, course_examination_method, course_specific_method,
-    course_advanced_placement, course_teacher
+    course_name, course_grade,course_cover, course_english, course_classification, course_character,
+    course_term, course_credit, course_class_hour,course_apply_major,course_major, course_examination_method,
+    course_specific_method, course_advanced_placement, course_teacher
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from course
-    where course_name = #{courseName,jdbcType=VARCHAR}
+    where course_name = #{courseName,jdbcType=VARCHAR} and course_major=#{courseMajor,jdbcType=VARCHAR} and course_grade=#{courseGrade,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from course
+    where course_name = #{courseName,jdbcType=VARCHAR} and course_major=#{courseMajor,jdbcType=VARCHAR} and course_grade=#{courseGrade,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from course
-    where course_name = #{courseName,jdbcType=VARCHAR}
+    where course_name = #{courseName,jdbcType=VARCHAR} and course_grade = #{courseGrade,jdbcType=VARCHAR} and course_major= #{courseMajor,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" keyColumn="course_name" keyProperty="courseName" parameterType="com.example.backend.model.Course" useGeneratedKeys="true">
-    insert into course (course_english, course_classification,
+    insert into course (course_grade, course_english, course_classification,
       course_character, course_term, course_credit,
       course_class_hour, course_major, course_examination_method,
       course_specific_method, course_advanced_placement,
       course_teacher)
-    values (#{courseEnglish,jdbcType=VARCHAR}, #{courseClassification,jdbcType=VARCHAR},
+    values (#{courseGrade,jdbcType=VARCHAR}, #{courseEnglish,jdbcType=VARCHAR}, #{courseClassification,jdbcType=VARCHAR},
       #{courseCharacter,jdbcType=VARCHAR}, #{courseTerm,jdbcType=VARCHAR}, #{courseCredit,jdbcType=FLOAT},
       #{courseClassHour,jdbcType=INTEGER}, #{courseMajor,jdbcType=VARCHAR}, #{courseExaminationMethod,jdbcType=VARCHAR},
       #{courseSpecificMethod,jdbcType=VARCHAR}, #{courseAdvancedPlacement,jdbcType=VARCHAR},
       #{courseTeacher,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="course_name" keyProperty="courseName" parameterType="com.example.backend.model.Course" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.example.backend.model.Course">
     insert into course
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseName != null">
+        course_name,
+      </if>
+      <if test="courseGrade != null">
+        course_grade,
+      </if>
+      <if test="courseCover != null">
+        course_cover,
+      </if>
       <if test="courseEnglish != null">
         course_english,
       </if>
@@ -63,6 +104,9 @@
       <if test="courseClassHour != null">
         course_class_hour,
       </if>
+      <if test="courseApplyMajor != null">
+        course_apply_major,
+      </if>
       <if test="courseMajor != null">
         course_major,
       </if>
@@ -75,8 +119,20 @@
       <if test="courseAdvancedPlacement != null">
         course_advanced_placement,
       </if>
+      <if test="courseTeacher != null">
+        course_teacher,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseGrade != null">
+        #{courseGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCover != null">
+        #{courseCover,jdbcType=VARCHAR},
+      </if>
       <if test="courseEnglish != null">
         #{courseEnglish,jdbcType=VARCHAR},
       </if>
@@ -95,6 +151,9 @@
       <if test="courseClassHour != null">
         #{courseClassHour,jdbcType=INTEGER},
       </if>
+      <if test="courseApplyMajor != null">
+        #{courseApplyMajor,jdbcType=VARCHAR},
+      </if>
       <if test="courseMajor != null">
         #{courseMajor,jdbcType=VARCHAR},
       </if>
@@ -107,11 +166,17 @@
       <if test="courseAdvancedPlacement != null">
         #{courseAdvancedPlacement,jdbcType=VARCHAR},
       </if>
+      <if test="courseTeacher != null">
+        #{courseTeacher,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.Course">
     update course
     <set>
+      <if test="courseCover != null">
+        course_cover = #{courseCover,jdbcType=VARCHAR},
+      </if>
       <if test="courseEnglish != null">
         course_english = #{courseEnglish,jdbcType=VARCHAR},
       </if>
@@ -130,8 +195,8 @@
       <if test="courseClassHour != null">
         course_class_hour = #{courseClassHour,jdbcType=INTEGER},
       </if>
-      <if test="courseMajor != null">
-        course_major = #{courseMajor,jdbcType=VARCHAR},
+      <if test="courseApplyMajor != null">
+        course_apply_major = #{courseApplyMajor,jdbcType=VARCHAR},
       </if>
       <if test="courseExaminationMethod != null">
         course_examination_method = #{courseExaminationMethod,jdbcType=VARCHAR},
@@ -146,11 +211,12 @@
         course_teacher = #{courseTeacher,jdbcType=INTEGER},
       </if>
     </set>
-    where course_name = #{courseName,jdbcType=VARCHAR}
+    where course_name = #{courseName,jdbcType=VARCHAR} and course_major =#{courseMajor,jdbcType=VARCHAR} and course_grade=#{courseGrade,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.backend.model.Course">
     update course
-    set course_english = #{courseEnglish,jdbcType=VARCHAR},
+    set course_grade = #{courseGrade,jdbcType=VARCHAR},
+      course_english = #{courseEnglish,jdbcType=VARCHAR},
       course_classification = #{courseClassification,jdbcType=VARCHAR},
       course_character = #{courseCharacter,jdbcType=VARCHAR},
       course_term = #{courseTerm,jdbcType=VARCHAR},
@@ -163,8 +229,22 @@
       course_teacher = #{courseTeacher,jdbcType=INTEGER}
     where course_name = #{courseName,jdbcType=VARCHAR}
   </update>
-
   <select id="select" parameterType="integer" resultType="String">
     select course_name from course where #{teacherNum}=course_teacher
+  </select>
+  <select id="selectCourse" parameterType="string" resultMap="GradeResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from course
+    where course_major= #{courseMajor,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByGrade" parameterType="string" resultMap="GradeResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from course
+    where course_grade = #{courseGrade,jdbcType=VARCHAR} and course_major= #{courseMajor,jdbcType=VARCHAR}
+  </select>
+  <select id="getAllCourseByTeacher" parameterType="integer" resultMap="nameResultMap">
+    select course_name,course_grade,course_major,course_cover from course where course_teacher =#{courseTeacher,jdbcType=INTEGER}
   </select>
 </mapper>

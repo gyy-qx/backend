@@ -11,6 +11,16 @@
     <result column="teacher_tel" jdbcType="VARCHAR" property="teacherTel" />
     <result column="teacher_email" jdbcType="VARCHAR" property="teacherEmail" />
   </resultMap>
+  <resultMap id="TeacherResultMap" type="com.example.backend.model.Teacher">
+    <id column="teacher_research" jdbcType="VARCHAR" property="teacherResearch" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="teacher_sex" jdbcType="VARCHAR" property="teacherSex" />
+    <result column="teacher_professional_title" jdbcType="VARCHAR" property="teacherProfessionalTitle" />
+    <result column="teacher_education" jdbcType="VARCHAR" property="teacherEducation" />
+    <result column="teacher_number" jdbcType="INTEGER" property="teacherNumber" />
+    <result column="teacher_tel" jdbcType="VARCHAR" property="teacherTel" />
+    <result column="teacher_email" jdbcType="VARCHAR" property="teacherEmail" />
+  </resultMap>
   <sql id="Base_Column_List">
     teacher_number, teacher_name, teacher_sex, teacher_professional_title, teacher_education,
     teacher_research, teacher_tel, teacher_email
@@ -120,4 +130,20 @@
       teacher_email = #{teacherEmail,jdbcType=VARCHAR}
     where teacher_number = #{teacherNumber,jdbcType=INTEGER}
   </update>
+
+<select id="selectAllTeacher" parameterType="string" resultMap="TeacherResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from teacher
+  where teacher_research = #{teacherResearch,jdbcType=INTEGER}
+</select>
+  <select id="selectTeacherName" resultType="string">
+    select teacher_name from teacher
+  </select>
+  <select id="getTeacherNumber" parameterType="string" resultType="integer">
+    select teacher_number from teacher where teacher_name=#{teacherName,jdbcType=VARCHAR}
+  </select>
+  <select id="getTeacherName" parameterType="integer" resultType="string">
+    select teacher_name  from teacher where teacher_number=#{teacherName,jdbcType=INTEGER}
+  </select>
 </mapper>

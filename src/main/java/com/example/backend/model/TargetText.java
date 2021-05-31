@@ -8,15 +8,21 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 /**
- * character
+ * target_text
  * @author
  */
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
-public class Character implements Serializable {
+@Data
+public class TargetText implements Serializable {
+    private Integer courseNumber;
+
     private String courseName;
+
+    private String courseGrade;
+
+    private String courseMajor;
 
     private String courseTargetOne;
 

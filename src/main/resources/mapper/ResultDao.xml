@@ -2,8 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.backend.mapper.ResultDao">
   <resultMap id="BaseResultMap" type="com.example.backend.model.Result">
+    <id column="number" jdbcType="INTEGER" property="number" />
+    <result column="student_class" jdbcType="VARCHAR" property="studentClass" />
     <result column="student_sno" jdbcType="INTEGER" property="studentSno" />
-    <result column="course_nume" jdbcType="VARCHAR" property="courseNume" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
     <result column="course_one_ordinary_score" jdbcType="FLOAT" property="courseOneOrdinaryScore" />
     <result column="course_one_experiment_score" jdbcType="FLOAT" property="courseOneExperimentScore" />
     <result column="course_one_ending_score" jdbcType="FLOAT" property="courseOneEndingScore" />
@@ -26,40 +28,63 @@
     <result column="course_five_achievement_degree" jdbcType="FLOAT" property="courseFiveAchievementDegree" />
     <result column="course_achievement_degree" jdbcType="FLOAT" property="courseAchievementDegree" />
   </resultMap>
-  <insert id="insert" parameterType="com.example.backend.model.Result">
-    insert into result (student_sno, course_nume, course_one_ordinary_score, 
-      course_one_experiment_score, course_one_ending_score, 
-      course_two_ordinary_score, course_two_experiment_score, 
-      course_two_ending_score, course_three_ordinary_score, 
-      course_three_experiment_score, course_three_ending_score, 
-      course_four_ordinary_score, course_four_experiment_score, 
-      course_four_ending_score, course_five_ordinary_score, 
-      course_five_experiment_score, course_five_ending_score, 
-      course_one_achievement_degree, course_two_achievement_degree, 
-      course_three_achievement_degree, course_four_achievement_degree, 
-      course_five_achievement_degree, course_achievement_degree
-      )
-    values (#{studentSno,jdbcType=INTEGER}, #{courseNume,jdbcType=VARCHAR}, #{courseOneOrdinaryScore,jdbcType=FLOAT}, 
-      #{courseOneExperimentScore,jdbcType=FLOAT}, #{courseOneEndingScore,jdbcType=FLOAT}, 
-      #{courseTwoOrdinaryScore,jdbcType=FLOAT}, #{courseTwoExperimentScore,jdbcType=FLOAT}, 
-      #{courseTwoEndingScore,jdbcType=FLOAT}, #{courseThreeOrdinaryScore,jdbcType=FLOAT}, 
-      #{courseThreeExperimentScore,jdbcType=FLOAT}, #{courseThreeEndingScore,jdbcType=FLOAT}, 
-      #{courseFourOrdinaryScore,jdbcType=FLOAT}, #{courseFourExperimentScore,jdbcType=FLOAT}, 
-      #{courseFourEndingScore,jdbcType=FLOAT}, #{courseFiveOrdinaryScore,jdbcType=FLOAT}, 
-      #{courseFiveExperimentScore,jdbcType=FLOAT}, #{courseFiveEndingScore,jdbcType=FLOAT}, 
-      #{courseOneAchievementDegree,jdbcType=FLOAT}, #{courseTwoAchievementDegree,jdbcType=FLOAT}, 
-      #{courseThreeAchievementDegree,jdbcType=FLOAT}, #{courseFourAchievementDegree,jdbcType=FLOAT}, 
-      #{courseFiveAchievementDegree,jdbcType=FLOAT}, #{courseAchievementDegree,jdbcType=FLOAT}
-      )
+  <sql id="Base_Column_List">
+    `number`, student_class, student_sno, course_name, course_one_ordinary_score, course_one_experiment_score,
+    course_one_ending_score, course_two_ordinary_score, course_two_experiment_score,
+    course_two_ending_score, course_three_ordinary_score, course_three_experiment_score,
+    course_three_ending_score, course_four_ordinary_score, course_four_experiment_score,
+    course_four_ending_score, course_five_ordinary_score, course_five_experiment_score,
+    course_five_ending_score, course_one_achievement_degree, course_two_achievement_degree,
+    course_three_achievement_degree, course_four_achievement_degree, course_five_achievement_degree,
+    course_achievement_degree
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from result
+    where `number` = #{number,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from result
+    where `number` = #{number,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="number" keyProperty="number" parameterType="com.example.backend.model.Result" useGeneratedKeys="true">
+    insert into result (student_class, student_sno, course_name,
+      course_one_ordinary_score, course_one_experiment_score,
+      course_one_ending_score, course_two_ordinary_score,
+      course_two_experiment_score, course_two_ending_score,
+      course_three_ordinary_score, course_three_experiment_score,
+      course_three_ending_score, course_four_ordinary_score,
+      course_four_experiment_score, course_four_ending_score,
+      course_five_ordinary_score, course_five_experiment_score,
+      course_five_ending_score, course_one_achievement_degree,
+      course_two_achievement_degree, course_three_achievement_degree,
+      course_four_achievement_degree, course_five_achievement_degree,
+      course_achievement_degree)
+    values (#{studentClass,jdbcType=VARCHAR}, #{studentSno,jdbcType=INTEGER}, #{courseName,jdbcType=VARCHAR},
+      #{courseOneOrdinaryScore,jdbcType=FLOAT}, #{courseOneExperimentScore,jdbcType=FLOAT},
+      #{courseOneEndingScore,jdbcType=FLOAT}, #{courseTwoOrdinaryScore,jdbcType=FLOAT},
+      #{courseTwoExperimentScore,jdbcType=FLOAT}, #{courseTwoEndingScore,jdbcType=FLOAT},
+      #{courseThreeOrdinaryScore,jdbcType=FLOAT}, #{courseThreeExperimentScore,jdbcType=FLOAT},
+      #{courseThreeEndingScore,jdbcType=FLOAT}, #{courseFourOrdinaryScore,jdbcType=FLOAT},
+      #{courseFourExperimentScore,jdbcType=FLOAT}, #{courseFourEndingScore,jdbcType=FLOAT},
+      #{courseFiveOrdinaryScore,jdbcType=FLOAT}, #{courseFiveExperimentScore,jdbcType=FLOAT},
+      #{courseFiveEndingScore,jdbcType=FLOAT}, #{courseOneAchievementDegree,jdbcType=FLOAT},
+      #{courseTwoAchievementDegree,jdbcType=FLOAT}, #{courseThreeAchievementDegree,jdbcType=FLOAT},
+      #{courseFourAchievementDegree,jdbcType=FLOAT}, #{courseFiveAchievementDegree,jdbcType=FLOAT},
+      #{courseAchievementDegree,jdbcType=FLOAT})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.backend.model.Result">
+  <insert id="insertSelective" keyColumn="number" keyProperty="number" parameterType="com.example.backend.model.Result" useGeneratedKeys="true">
     insert into result
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="studentClass != null">
+        student_class,
+      </if>
       <if test="studentSno != null">
         student_sno,
       </if>
-      <if test="courseNume != null">
-        course_nume,
+      <if test="courseName != null">
+        course_name,
       </if>
       <if test="courseOneOrdinaryScore != null">
         course_one_ordinary_score,
@@ -126,11 +151,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="studentClass != null">
+        #{studentClass,jdbcType=VARCHAR},
+      </if>
       <if test="studentSno != null">
         #{studentSno,jdbcType=INTEGER},
       </if>
-      <if test="courseNume != null">
-        #{courseNume,jdbcType=VARCHAR},
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
       </if>
       <if test="courseOneOrdinaryScore != null">
         #{courseOneOrdinaryScore,jdbcType=FLOAT},
@@ -197,4 +225,118 @@
       </if>
     </trim>
   </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.Result">
+    update result
+    <set>
+      <if test="studentClass != null">
+        student_class = #{studentClass,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSno != null">
+        student_sno = #{studentSno,jdbcType=INTEGER},
+      </if>
+      <if test="courseName != null">
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseOneOrdinaryScore != null">
+        course_one_ordinary_score = #{courseOneOrdinaryScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseOneExperimentScore != null">
+        course_one_experiment_score = #{courseOneExperimentScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseOneEndingScore != null">
+        course_one_ending_score = #{courseOneEndingScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseTwoOrdinaryScore != null">
+        course_two_ordinary_score = #{courseTwoOrdinaryScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseTwoExperimentScore != null">
+        course_two_experiment_score = #{courseTwoExperimentScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseTwoEndingScore != null">
+        course_two_ending_score = #{courseTwoEndingScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseThreeOrdinaryScore != null">
+        course_three_ordinary_score = #{courseThreeOrdinaryScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseThreeExperimentScore != null">
+        course_three_experiment_score = #{courseThreeExperimentScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseThreeEndingScore != null">
+        course_three_ending_score = #{courseThreeEndingScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseFourOrdinaryScore != null">
+        course_four_ordinary_score = #{courseFourOrdinaryScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseFourExperimentScore != null">
+        course_four_experiment_score = #{courseFourExperimentScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseFourEndingScore != null">
+        course_four_ending_score = #{courseFourEndingScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseFiveOrdinaryScore != null">
+        course_five_ordinary_score = #{courseFiveOrdinaryScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseFiveExperimentScore != null">
+        course_five_experiment_score = #{courseFiveExperimentScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseFiveEndingScore != null">
+        course_five_ending_score = #{courseFiveEndingScore,jdbcType=FLOAT},
+      </if>
+      <if test="courseOneAchievementDegree != null">
+        course_one_achievement_degree = #{courseOneAchievementDegree,jdbcType=FLOAT},
+      </if>
+      <if test="courseTwoAchievementDegree != null">
+        course_two_achievement_degree = #{courseTwoAchievementDegree,jdbcType=FLOAT},
+      </if>
+      <if test="courseThreeAchievementDegree != null">
+        course_three_achievement_degree = #{courseThreeAchievementDegree,jdbcType=FLOAT},
+      </if>
+      <if test="courseFourAchievementDegree != null">
+        course_four_achievement_degree = #{courseFourAchievementDegree,jdbcType=FLOAT},
+      </if>
+      <if test="courseFiveAchievementDegree != null">
+        course_five_achievement_degree = #{courseFiveAchievementDegree,jdbcType=FLOAT},
+      </if>
+      <if test="courseAchievementDegree != null">
+        course_achievement_degree = #{courseAchievementDegree,jdbcType=FLOAT},
+      </if>
+    </set>
+    where `number` = #{number,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.backend.model.Result">
+    update result
+    set student_class = #{studentClass,jdbcType=VARCHAR},
+      student_sno = #{studentSno,jdbcType=INTEGER},
+      course_name = #{courseName,jdbcType=VARCHAR},
+      course_one_ordinary_score = #{courseOneOrdinaryScore,jdbcType=FLOAT},
+      course_one_experiment_score = #{courseOneExperimentScore,jdbcType=FLOAT},
+      course_one_ending_score = #{courseOneEndingScore,jdbcType=FLOAT},
+      course_two_ordinary_score = #{courseTwoOrdinaryScore,jdbcType=FLOAT},
+      course_two_experiment_score = #{courseTwoExperimentScore,jdbcType=FLOAT},
+      course_two_ending_score = #{courseTwoEndingScore,jdbcType=FLOAT},
+      course_three_ordinary_score = #{courseThreeOrdinaryScore,jdbcType=FLOAT},
+      course_three_experiment_score = #{courseThreeExperimentScore,jdbcType=FLOAT},
+      course_three_ending_score = #{courseThreeEndingScore,jdbcType=FLOAT},
+      course_four_ordinary_score = #{courseFourOrdinaryScore,jdbcType=FLOAT},
+      course_four_experiment_score = #{courseFourExperimentScore,jdbcType=FLOAT},
+      course_four_ending_score = #{courseFourEndingScore,jdbcType=FLOAT},
+      course_five_ordinary_score = #{courseFiveOrdinaryScore,jdbcType=FLOAT},
+      course_five_experiment_score = #{courseFiveExperimentScore,jdbcType=FLOAT},
+      course_five_ending_score = #{courseFiveEndingScore,jdbcType=FLOAT},
+      course_one_achievement_degree = #{courseOneAchievementDegree,jdbcType=FLOAT},
+      course_two_achievement_degree = #{courseTwoAchievementDegree,jdbcType=FLOAT},
+      course_three_achievement_degree = #{courseThreeAchievementDegree,jdbcType=FLOAT},
+      course_four_achievement_degree = #{courseFourAchievementDegree,jdbcType=FLOAT},
+      course_five_achievement_degree = #{courseFiveAchievementDegree,jdbcType=FLOAT},
+      course_achievement_degree = #{courseAchievementDegree,jdbcType=FLOAT}
+    where `number` = #{number,jdbcType=INTEGER}
+  </update>
+  <select id="getResultScore" resultMap="BaseResultMap">
+select
+    <include refid="Base_Column_List" />
+    from result where student_class=#{studentClass,jdbcType=VARCHAR} and course_name=#{courseName,jdbcType=VARCHAR}
+  </select>
+  <select id="getResultScoreNumber" resultType="integer">
+    select  number from  result where student_sno = #{param2} and course_name=#{param1}
+  </select>
 </mapper>

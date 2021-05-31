@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.EmailDao">
+  <resultMap id="BaseResultMap" type="com.example.backend.model.Email">
+    <id column="num" jdbcType="INTEGER" property="num" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="course_major" jdbcType="VARCHAR" property="courseMajor" />
+    <result column="course_grade" jdbcType="VARCHAR" property="courseGrade" />
+    <result column="course_teacher" jdbcType="INTEGER" property="courseTeacher" />
+    <result column="email_title" jdbcType="VARCHAR" property="emailTitle" />
+    <result column="email_teacher" jdbcType="VARCHAR" property="emailTeacher" />
+    <result column="email_content" jdbcType="VARCHAR" property="emailContent" />
+    <result column="email_state" jdbcType="VARCHAR" property="emailState" />
+    <result column="email_Time" jdbcType="VARCHAR" property="emailTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    num, course_name, course_major, course_grade, course_teacher, email_title, email_teacher,email_content,
+    email_state,email_time
+  </sql>
+  <select id="selectByTeacher" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from email
+    where course_teacher = #{courseTeacher,jdbcType=INTEGER}
+  </select>
+  <select id="selectNum" resultType="integer">
+    select
+    num
+    from email
+    where course_name=#{param1} and course_major=#{param2} and course_grade=#{param3} and course_teacher = #{courseTeacher,jdbcType=INTEGER}
+    and email_title =#{param5} and email_content=#{param6} and email_state=#{param7} and email_time = #{param8}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from email
+    where num = #{num,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="num" keyProperty="num" parameterType="com.example.backend.model.Email" useGeneratedKeys="true">
+    insert into email (course_name, course_major, course_grade,
+      course_teacher, email_title,email_teacher, email_content,
+      email_state,email_time)
+    values (#{courseName,jdbcType=VARCHAR}, #{courseMajor,jdbcType=VARCHAR}, #{courseGrade,jdbcType=VARCHAR},
+      #{courseTeacher,jdbcType=INTEGER}, #{emailTitle,jdbcType=VARCHAR},#{emailTeacher,jdbcType=VARCHAR}, #{emailContent,jdbcType=VARCHAR},
+      #{emailState,jdbcType=VARCHAR},#{emailTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="num" keyProperty="num" parameterType="com.example.backend.model.Email" useGeneratedKeys="true">
+    insert into email
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseName != null">
+        course_name,
+      </if>
+      <if test="courseMajor != null">
+        course_major,
+      </if>
+      <if test="courseGrade != null">
+        course_grade,
+      </if>
+      <if test="courseTeacher != null">
+        course_teacher,
+      </if>
+      <if test="emailTitle != null">
+        email_title,
+      </if>
+      <if test="emailContent != null">
+        email_content,
+      </if>
+      <if test="emailState != null">
+        email_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseMajor != null">
+        #{courseMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="courseGrade != null">
+        #{courseGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTeacher != null">
+        #{courseTeacher,jdbcType=INTEGER},
+      </if>
+      <if test="emailTitle != null">
+        #{emailTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="emailContent != null">
+        #{emailContent,jdbcType=VARCHAR},
+      </if>
+      <if test="emailState != null">
+        #{emailState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.Email">
+    update email
+    <set>
+      <if test="courseName != null">
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseMajor != null">
+        course_major = #{courseMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="courseGrade != null">
+        course_grade = #{courseGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="courseTeacher != null">
+        course_teacher = #{courseTeacher,jdbcType=INTEGER},
+      </if>
+      <if test="emailTitle != null">
+        email_title = #{emailTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="emailContent != null">
+        email_content = #{emailContent,jdbcType=VARCHAR},
+      </if>
+      <if test="emailState != null">
+        email_state = #{emailState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where num = #{num,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.backend.model.Email">
+    update email
+    set course_name = #{courseName,jdbcType=VARCHAR},
+      course_major = #{courseMajor,jdbcType=VARCHAR},
+      course_grade = #{courseGrade,jdbcType=VARCHAR},
+      course_teacher = #{courseTeacher,jdbcType=INTEGER},
+      email_title = #{emailTitle,jdbcType=VARCHAR},
+      email_content = #{emailContent,jdbcType=VARCHAR},
+      email_state = #{emailState,jdbcType=VARCHAR}
+    where num = #{num,jdbcType=INTEGER}
+  </update>
+</mapper>

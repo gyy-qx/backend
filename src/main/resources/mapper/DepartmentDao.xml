@@ -4,10 +4,12 @@
   <resultMap id="BaseResultMap" type="com.example.backend.model.Department">
     <id column="research_name" jdbcType="VARCHAR" property="researchName" />
     <result column="research_chairman" jdbcType="INTEGER" property="researchChairman" />
+    <result column="chairman_name" jdbcType="VARCHAR" property="chairmanName" />
     <result column="research_tel" jdbcType="VARCHAR" property="researchTel" />
+    <result column="research_major" jdbcType="VARCHAR" property="researchMajor" />
   </resultMap>
   <sql id="Base_Column_List">
-    research_name, research_chairman, research_tel
+    research_name, research_chairman, chairman_name, research_tel, research_major
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
@@ -20,8 +22,10 @@
     where research_name = #{researchName,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" keyColumn="research_name" keyProperty="researchName" parameterType="com.example.backend.model.Department" useGeneratedKeys="true">
-    insert into department (research_chairman, research_tel)
-    values (#{researchChairman,jdbcType=INTEGER}, #{researchTel,jdbcType=VARCHAR})
+    insert into department (research_chairman, chairman_name, research_tel,
+      research_major)
+    values (#{researchChairman,jdbcType=INTEGER}, #{chairmanName,jdbcType=VARCHAR}, #{researchTel,jdbcType=VARCHAR},
+      #{researchMajor,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="research_name" keyProperty="researchName" parameterType="com.example.backend.model.Department" useGeneratedKeys="true">
     insert into department
@@ -29,16 +33,28 @@
       <if test="researchChairman != null">
         research_chairman,
       </if>
+      <if test="chairmanName != null">
+        chairman_name,
+      </if>
       <if test="researchTel != null">
         research_tel,
+      </if>
+      <if test="researchMajor != null">
+        research_major,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="researchChairman != null">
         #{researchChairman,jdbcType=INTEGER},
       </if>
+      <if test="chairmanName != null">
+        #{chairmanName,jdbcType=VARCHAR},
+      </if>
       <if test="researchTel != null">
         #{researchTel,jdbcType=VARCHAR},
+      </if>
+      <if test="researchMajor != null">
+        #{researchMajor,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -48,8 +64,14 @@
       <if test="researchChairman != null">
         research_chairman = #{researchChairman,jdbcType=INTEGER},
       </if>
+      <if test="chairmanName != null">
+        chairman_name = #{chairmanName,jdbcType=VARCHAR},
+      </if>
       <if test="researchTel != null">
         research_tel = #{researchTel,jdbcType=VARCHAR},
+      </if>
+      <if test="researchMajor != null">
+        research_major = #{researchMajor,jdbcType=VARCHAR},
       </if>
     </set>
     where research_name = #{researchName,jdbcType=VARCHAR}
@@ -57,7 +79,9 @@
   <update id="updateByPrimaryKey" parameterType="com.example.backend.model.Department">
     update department
     set research_chairman = #{researchChairman,jdbcType=INTEGER},
-      research_tel = #{researchTel,jdbcType=VARCHAR}
+      chairman_name = #{chairmanName,jdbcType=VARCHAR},
+      research_tel = #{researchTel,jdbcType=VARCHAR},
+      research_major = #{researchMajor,jdbcType=VARCHAR}
     where research_name = #{researchName,jdbcType=VARCHAR}
   </update>
   <select id="getResearchList" resultType="string">
@@ -65,5 +89,14 @@
   </select>
   <select id="selectChairman" resultType="integer">
     select research_chairman from department where research_name =#{researchName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByNumber" parameterType="integer" resultType="String">
+    select research_name from department where research_chairman =#{researchChairman,jdbcType=VARCHAR}
+  </select>
+  <select id="getMajor" parameterType="string" resultType="string">
+    select research_major from department where research_name =#{researchName,jdbcType=VARCHAR}
+  </select>
+  <select id="getAllMajor" resultType="string">
+    select research_major from department
   </select>
 </mapper>

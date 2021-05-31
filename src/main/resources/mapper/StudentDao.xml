@@ -10,12 +10,26 @@
     <result column="student_sex" jdbcType="VARCHAR" property="studentSex" />
     <result column="student_data" jdbcType="DATE" property="studentData" />
   </resultMap>
+  <resultMap id="stuResultMap" type="com.example.backend.model.Student">
+    <id column="student_class" jdbcType="VARCHAR" property="studentClass" />
+    <result column="student_name" jdbcType="VARCHAR" property="studentName" />
+    <result column="student_major" jdbcType="VARCHAR" property="studentMajor" />
+    <result column="student_grade" jdbcType="VARCHAR" property="studentGrade" />
+    <result column="student_sno" jdbcType="INTEGER" property="studentSno" />
+    <result column="student_sex" jdbcType="VARCHAR" property="studentSex" />
+    <result column="student_data" jdbcType="DATE" property="studentData" />
+  </resultMap>
+  <resultMap id="nameResultMap" type="com.example.backend.studentDto.StudentDto1">
+    <result column="student_sno" jdbcType="INTEGER" property="studentSno" />
+    <result column="student_name" jdbcType="VARCHAR" property="studentName" />
+    <result column="student_class" jdbcType="VARCHAR" property="studentClass" />
+  </resultMap>
   <sql id="Base_Column_List">
-    student_sno, student_name, student_major, student_grade, student_class, student_sex, 
+    student_sno, student_name, student_major, student_grade, student_class, student_sex,
     student_data
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from student
     where student_sno = #{studentSno,jdbcType=INTEGER}
@@ -24,11 +38,11 @@
     delete from student
     where student_sno = #{studentSno,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="student_sno" keyProperty="studentSno" parameterType="com.example.backend.model.Student" useGeneratedKeys="true">
-    insert into student (student_name, student_major, student_grade, 
+  <insert id="insert"  parameterType="com.example.backend.model.Student">
+    insert into student (student_sno,student_name, student_major, student_grade,
       student_class, student_sex, student_data
       )
-    values (#{studentName,jdbcType=VARCHAR}, #{studentMajor,jdbcType=VARCHAR}, #{studentGrade,jdbcType=VARCHAR}, 
+    values (#{studentSno,jdbcType=INTEGER},#{studentName,jdbcType=VARCHAR}, #{studentMajor,jdbcType=VARCHAR}, #{studentGrade,jdbcType=VARCHAR},
       #{studentClass,jdbcType=VARCHAR}, #{studentSex,jdbcType=VARCHAR}, #{studentData,jdbcType=DATE}
       )
   </insert>
@@ -109,4 +123,27 @@
       student_data = #{studentData,jdbcType=DATE}
     where student_sno = #{studentSno,jdbcType=INTEGER}
   </update>
+  <select id="selectMajor" resultType="string">
+select DISTINCT student_class from student where student_major=#{studentMajor,jdbcType=VARCHAR} and student_grade=#{studentGrade,jdbcType=VARCHAR}
+  </select>
+  <select id="getGrade" resultType="string">
+    select DISTINCT student_grade from student
+  </select>
+  <select id="selectByClass" parameterType="string" resultMap="stuResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from student where student_class = #{studentClass,jdbcType=VARCHAR}
+  </select>
+  <select id="getClassByCourse" parameterType="String" resultType="string">
+    select distinct student_class from student where student_grade=#{studentGrade,jdbcType=VARCHAR} and student_major = #{studentMajor,jdbcType=VARCHAR}
+  </select>
+  <select id="getClassByMajor" parameterType="string" resultType="string">
+    select distinct student_class from student where student_major = #{studentMajor,jdbcType=VARCHAR}
+  </select>
+  <select id="getStudentByClass" parameterType="string" resultMap="nameResultMap">
+    select student_sno,student_name from student where student_class =#{studentClass,jdbcType=VARCHAR}
+  </select>
+  <select id="getStudentByGrade" parameterType="string" resultMap="nameResultMap">
+    select student_sno,student_name,student_class from student where student_major=#{param1} and student_grade=#{param2};
+  </select>
 </mapper>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.ClassResultDao">
+  <resultMap id="BaseResultMap" type="com.example.backend.model.ClassResult">
+    <id column="number" jdbcType="INTEGER" property="number" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+    <result column="course_one_ordinary_score" jdbcType="DOUBLE" property="courseOneOrdinaryScore" />
+    <result column="course_one_experiment_score" jdbcType="DOUBLE" property="courseOneExperimentScore" />
+    <result column="course_one_ending_score" jdbcType="DOUBLE" property="courseOneEndingScore" />
+    <result column="course_two_ordinary_score" jdbcType="DOUBLE" property="courseTwoOrdinaryScore" />
+    <result column="course_two_experiment_score" jdbcType="DOUBLE" property="courseTwoExperimentScore" />
+    <result column="course_two_ending_score" jdbcType="DOUBLE" property="courseTwoEndingScore" />
+    <result column="course_three_ordinary_score" jdbcType="DOUBLE" property="courseThreeOrdinaryScore" />
+    <result column="course_three_experiment_score" jdbcType="DOUBLE" property="courseThreeExperimentScore" />
+    <result column="course_three_ending_score" jdbcType="DOUBLE" property="courseThreeEndingScore" />
+    <result column="course_four_ordinary_score" jdbcType="DOUBLE" property="courseFourOrdinaryScore" />
+    <result column="course_four_experiment_score" jdbcType="DOUBLE" property="courseFourExperimentScore" />
+    <result column="course_four_ending_score" jdbcType="DOUBLE" property="courseFourEndingScore" />
+    <result column="course_five_ordinary_score" jdbcType="DOUBLE" property="courseFiveOrdinaryScore" />
+    <result column="course_five_experiment_score" jdbcType="DOUBLE" property="courseFiveExperimentScore" />
+    <result column="course_five_ending_score" jdbcType="DOUBLE" property="courseFiveEndingScore" />
+    <result column="course_one_achievement_degree" jdbcType="DOUBLE" property="courseOneAchievementDegree" />
+    <result column="course_two_achievement_degree" jdbcType="DOUBLE" property="courseTwoAchievementDegree" />
+    <result column="course_three_achievement_degree" jdbcType="DOUBLE" property="courseThreeAchievementDegree" />
+    <result column="course_four_achievement_degree" jdbcType="DOUBLE" property="courseFourAchievementDegree" />
+    <result column="course_five_achievement_degree" jdbcType="DOUBLE" property="courseFiveAchievementDegree" />
+    <result column="course_achievement_degree" jdbcType="DOUBLE" property="courseAchievementDegree" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    `number`, course_name, class_name, course_one_ordinary_score, course_one_experiment_score,
+    course_one_ending_score, course_two_ordinary_score, course_two_experiment_score,
+    course_two_ending_score, course_three_ordinary_score, course_three_experiment_score,
+    course_three_ending_score, course_four_ordinary_score, course_four_experiment_score,
+    course_four_ending_score, course_five_ordinary_score, course_five_experiment_score,
+    course_five_ending_score, course_one_achievement_degree, course_two_achievement_degree,
+    course_three_achievement_degree, course_four_achievement_degree, course_five_achievement_degree,
+    course_achievement_degree
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from class_result
+    where course_name = #{courseName,jdbcType=VARCHAR} and class_name =#{className,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from class_result
+    where `number` = #{number,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="number" keyProperty="number" parameterType="com.example.backend.model.ClassResult" useGeneratedKeys="true">
+    insert into class_result (course_name, class_name, course_one_ordinary_score,
+      course_one_experiment_score, course_one_ending_score,
+      course_two_ordinary_score, course_two_experiment_score,
+      course_two_ending_score, course_three_ordinary_score,
+      course_three_experiment_score, course_three_ending_score,
+      course_four_ordinary_score, course_four_experiment_score,
+      course_four_ending_score, course_five_ordinary_score,
+      course_five_experiment_score, course_five_ending_score,
+      course_one_achievement_degree, course_two_achievement_degree,
+      course_three_achievement_degree, course_four_achievement_degree,
+      course_five_achievement_degree, course_achievement_degree
+      )
+    values (#{courseName,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{courseOneOrdinaryScore,jdbcType=DOUBLE},
+      #{courseOneExperimentScore,jdbcType=DOUBLE}, #{courseOneEndingScore,jdbcType=DOUBLE},
+      #{courseTwoOrdinaryScore,jdbcType=DOUBLE}, #{courseTwoExperimentScore,jdbcType=DOUBLE},
+      #{courseTwoEndingScore,jdbcType=DOUBLE}, #{courseThreeOrdinaryScore,jdbcType=DOUBLE},
+      #{courseThreeExperimentScore,jdbcType=DOUBLE}, #{courseThreeEndingScore,jdbcType=DOUBLE},
+      #{courseFourOrdinaryScore,jdbcType=DOUBLE}, #{courseFourExperimentScore,jdbcType=DOUBLE},
+      #{courseFourEndingScore,jdbcType=DOUBLE}, #{courseFiveOrdinaryScore,jdbcType=DOUBLE},
+      #{courseFiveExperimentScore,jdbcType=DOUBLE}, #{courseFiveEndingScore,jdbcType=DOUBLE},
+      #{courseOneAchievementDegree,jdbcType=DOUBLE}, #{courseTwoAchievementDegree,jdbcType=DOUBLE},
+      #{courseThreeAchievementDegree,jdbcType=DOUBLE}, #{courseFourAchievementDegree,jdbcType=DOUBLE},
+      #{courseFiveAchievementDegree,jdbcType=DOUBLE}, #{courseAchievementDegree,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="number" keyProperty="number" parameterType="com.example.backend.model.ClassResult" useGeneratedKeys="true">
+    insert into class_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseName != null">
+        course_name,
+      </if>
+      <if test="className != null">
+        class_name,
+      </if>
+      <if test="courseOneOrdinaryScore != null">
+        course_one_ordinary_score,
+      </if>
+      <if test="courseOneExperimentScore != null">
+        course_one_experiment_score,
+      </if>
+      <if test="courseOneEndingScore != null">
+        course_one_ending_score,
+      </if>
+      <if test="courseTwoOrdinaryScore != null">
+        course_two_ordinary_score,
+      </if>
+      <if test="courseTwoExperimentScore != null">
+        course_two_experiment_score,
+      </if>
+      <if test="courseTwoEndingScore != null">
+        course_two_ending_score,
+      </if>
+      <if test="courseThreeOrdinaryScore != null">
+        course_three_ordinary_score,
+      </if>
+      <if test="courseThreeExperimentScore != null">
+        course_three_experiment_score,
+      </if>
+      <if test="courseThreeEndingScore != null">
+        course_three_ending_score,
+      </if>
+      <if test="courseFourOrdinaryScore != null">
+        course_four_ordinary_score,
+      </if>
+      <if test="courseFourExperimentScore != null">
+        course_four_experiment_score,
+      </if>
+      <if test="courseFourEndingScore != null">
+        course_four_ending_score,
+      </if>
+      <if test="courseFiveOrdinaryScore != null">
+        course_five_ordinary_score,
+      </if>
+      <if test="courseFiveExperimentScore != null">
+        course_five_experiment_score,
+      </if>
+      <if test="courseFiveEndingScore != null">
+        course_five_ending_score,
+      </if>
+      <if test="courseOneAchievementDegree != null">
+        course_one_achievement_degree,
+      </if>
+      <if test="courseTwoAchievementDegree != null">
+        course_two_achievement_degree,
+      </if>
+      <if test="courseThreeAchievementDegree != null">
+        course_three_achievement_degree,
+      </if>
+      <if test="courseFourAchievementDegree != null">
+        course_four_achievement_degree,
+      </if>
+      <if test="courseFiveAchievementDegree != null">
+        course_five_achievement_degree,
+      </if>
+      <if test="courseAchievementDegree != null">
+        course_achievement_degree,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null">
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="courseOneOrdinaryScore != null">
+        #{courseOneOrdinaryScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseOneExperimentScore != null">
+        #{courseOneExperimentScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseOneEndingScore != null">
+        #{courseOneEndingScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseTwoOrdinaryScore != null">
+        #{courseTwoOrdinaryScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseTwoExperimentScore != null">
+        #{courseTwoExperimentScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseTwoEndingScore != null">
+        #{courseTwoEndingScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseThreeOrdinaryScore != null">
+        #{courseThreeOrdinaryScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseThreeExperimentScore != null">
+        #{courseThreeExperimentScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseThreeEndingScore != null">
+        #{courseThreeEndingScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFourOrdinaryScore != null">
+        #{courseFourOrdinaryScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFourExperimentScore != null">
+        #{courseFourExperimentScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFourEndingScore != null">
+        #{courseFourEndingScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFiveOrdinaryScore != null">
+        #{courseFiveOrdinaryScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFiveExperimentScore != null">
+        #{courseFiveExperimentScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFiveEndingScore != null">
+        #{courseFiveEndingScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseOneAchievementDegree != null">
+        #{courseOneAchievementDegree,jdbcType=DOUBLE},
+      </if>
+      <if test="courseTwoAchievementDegree != null">
+        #{courseTwoAchievementDegree,jdbcType=DOUBLE},
+      </if>
+      <if test="courseThreeAchievementDegree != null">
+        #{courseThreeAchievementDegree,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFourAchievementDegree != null">
+        #{courseFourAchievementDegree,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFiveAchievementDegree != null">
+        #{courseFiveAchievementDegree,jdbcType=DOUBLE},
+      </if>
+      <if test="courseAchievementDegree != null">
+        #{courseAchievementDegree,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.ClassResult">
+    update class_result
+    <set>
+      <if test="courseName != null">
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null">
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="courseOneOrdinaryScore != null">
+        course_one_ordinary_score = #{courseOneOrdinaryScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseOneExperimentScore != null">
+        course_one_experiment_score = #{courseOneExperimentScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseOneEndingScore != null">
+        course_one_ending_score = #{courseOneEndingScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseTwoOrdinaryScore != null">
+        course_two_ordinary_score = #{courseTwoOrdinaryScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseTwoExperimentScore != null">
+        course_two_experiment_score = #{courseTwoExperimentScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseTwoEndingScore != null">
+        course_two_ending_score = #{courseTwoEndingScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseThreeOrdinaryScore != null">
+        course_three_ordinary_score = #{courseThreeOrdinaryScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseThreeExperimentScore != null">
+        course_three_experiment_score = #{courseThreeExperimentScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseThreeEndingScore != null">
+        course_three_ending_score = #{courseThreeEndingScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFourOrdinaryScore != null">
+        course_four_ordinary_score = #{courseFourOrdinaryScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFourExperimentScore != null">
+        course_four_experiment_score = #{courseFourExperimentScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFourEndingScore != null">
+        course_four_ending_score = #{courseFourEndingScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFiveOrdinaryScore != null">
+        course_five_ordinary_score = #{courseFiveOrdinaryScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFiveExperimentScore != null">
+        course_five_experiment_score = #{courseFiveExperimentScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFiveEndingScore != null">
+        course_five_ending_score = #{courseFiveEndingScore,jdbcType=DOUBLE},
+      </if>
+      <if test="courseOneAchievementDegree != null">
+        course_one_achievement_degree = #{courseOneAchievementDegree,jdbcType=DOUBLE},
+      </if>
+      <if test="courseTwoAchievementDegree != null">
+        course_two_achievement_degree = #{courseTwoAchievementDegree,jdbcType=DOUBLE},
+      </if>
+      <if test="courseThreeAchievementDegree != null">
+        course_three_achievement_degree = #{courseThreeAchievementDegree,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFourAchievementDegree != null">
+        course_four_achievement_degree = #{courseFourAchievementDegree,jdbcType=DOUBLE},
+      </if>
+      <if test="courseFiveAchievementDegree != null">
+        course_five_achievement_degree = #{courseFiveAchievementDegree,jdbcType=DOUBLE},
+      </if>
+      <if test="courseAchievementDegree != null">
+        course_achievement_degree = #{courseAchievementDegree,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where course_name = #{courseName,jdbcType=VARCHAR} and class_name=#{className,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.backend.model.ClassResult">
+    update class_result
+    set course_name = #{courseName,jdbcType=VARCHAR},
+      class_name = #{className,jdbcType=VARCHAR},
+      course_one_ordinary_score = #{courseOneOrdinaryScore,jdbcType=DOUBLE},
+      course_one_experiment_score = #{courseOneExperimentScore,jdbcType=DOUBLE},
+      course_one_ending_score = #{courseOneEndingScore,jdbcType=DOUBLE},
+      course_two_ordinary_score = #{courseTwoOrdinaryScore,jdbcType=DOUBLE},
+      course_two_experiment_score = #{courseTwoExperimentScore,jdbcType=DOUBLE},
+      course_two_ending_score = #{courseTwoEndingScore,jdbcType=DOUBLE},
+      course_three_ordinary_score = #{courseThreeOrdinaryScore,jdbcType=DOUBLE},
+      course_three_experiment_score = #{courseThreeExperimentScore,jdbcType=DOUBLE},
+      course_three_ending_score = #{courseThreeEndingScore,jdbcType=DOUBLE},
+      course_four_ordinary_score = #{courseFourOrdinaryScore,jdbcType=DOUBLE},
+      course_four_experiment_score = #{courseFourExperimentScore,jdbcType=DOUBLE},
+      course_four_ending_score = #{courseFourEndingScore,jdbcType=DOUBLE},
+      course_five_ordinary_score = #{courseFiveOrdinaryScore,jdbcType=DOUBLE},
+      course_five_experiment_score = #{courseFiveExperimentScore,jdbcType=DOUBLE},
+      course_five_ending_score = #{courseFiveEndingScore,jdbcType=DOUBLE},
+      course_one_achievement_degree = #{courseOneAchievementDegree,jdbcType=DOUBLE},
+      course_two_achievement_degree = #{courseTwoAchievementDegree,jdbcType=DOUBLE},
+      course_three_achievement_degree = #{courseThreeAchievementDegree,jdbcType=DOUBLE},
+      course_four_achievement_degree = #{courseFourAchievementDegree,jdbcType=DOUBLE},
+      course_five_achievement_degree = #{courseFiveAchievementDegree,jdbcType=DOUBLE},
+      course_achievement_degree = #{courseAchievementDegree,jdbcType=DOUBLE}
+    where `number` = #{number,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 @Mapper
+@Repository
 public interface DepartmentDao {
     int deleteByPrimaryKey(String researchName);
     int insert(Department record);
@@ -16,6 +16,10 @@ public interface DepartmentDao {
     int updateByPrimaryKeySelective(Department record);
     int updateByPrimaryKey(Department record);
 
+
+    String getMajor(String researchName);
     List<String> getResearchList();
     Integer selectChairman(String researchName);
+    String selectByNumber(Integer researchChairman);
+    List<String> getAllMajor();
 }

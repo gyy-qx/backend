@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.ProcessTextDao">
+  <resultMap id="BaseResultMap" type="com.example.backend.model.ProcessText">
+    <id column="number" jdbcType="INTEGER" property="number" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="course_major" jdbcType="VARCHAR" property="courseMajor" />
+    <result column="course_grade" jdbcType="VARCHAR" property="courseGrade" />
+    <result column="process_classification" jdbcType="VARCHAR" property="processClassification" />
+    <result column="process_number" jdbcType="INTEGER" property="processNumber" />
+    <result column="process_content" jdbcType="VARCHAR" property="processContent" />
+    <result column="if_course_one" jdbcType="VARCHAR" property="ifCourseOne" />
+    <result column="if_course_two" jdbcType="VARCHAR" property="ifCourseTwo" />
+    <result column="if_course_three" jdbcType="VARCHAR" property="ifCourseThree" />
+    <result column="if_course_four" jdbcType="VARCHAR" property="ifCourseFour" />
+    <result column="if_course_five" jdbcType="VARCHAR" property="ifCourseFive" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    `number`, course_name, course_major, course_grade, process_classification, process_number,
+    process_content, if_course_one, if_course_two, if_course_three, if_course_four, if_course_five
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from process_text
+    where `number` = #{number,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteOrdinary">
+    delete from process_text
+    where course_name=#{param1,jdbcType=VARCHAR} and course_major=#{param2,jdbcType=VARCHAR} and course_grade =#{param3,jdbcType=VARCHAR}
+    and process_classification=#{param4,jdbcType=VARCHAR} and process_number=#{param5,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="number" keyProperty="number" parameterType="com.example.backend.model.ProcessText" useGeneratedKeys="true">
+    insert into process_text (course_name, course_major, course_grade,
+      process_classification, process_number, process_content,
+      if_course_one, if_course_two, if_course_three,
+      if_course_four, if_course_five)
+    values (#{courseName,jdbcType=VARCHAR}, #{courseMajor,jdbcType=VARCHAR}, #{courseGrade,jdbcType=VARCHAR},
+      #{processClassification,jdbcType=VARCHAR}, #{processNumber,jdbcType=INTEGER}, #{processContent,jdbcType=VARCHAR},
+      #{ifCourseOne,jdbcType=VARCHAR}, #{ifCourseTwo,jdbcType=VARCHAR}, #{ifCourseThree,jdbcType=VARCHAR},
+      #{ifCourseFour,jdbcType=VARCHAR}, #{ifCourseFive,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="number" keyProperty="number" parameterType="com.example.backend.model.ProcessText" useGeneratedKeys="true">
+    insert into process_text
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseName != null">
+        course_name,
+      </if>
+      <if test="courseMajor != null">
+        course_major,
+      </if>
+      <if test="courseGrade != null">
+        course_grade,
+      </if>
+      <if test="processClassification != null">
+        process_classification,
+      </if>
+      <if test="processNumber != null">
+        process_number,
+      </if>
+      <if test="processContent != null">
+        process_content,
+      </if>
+      <if test="ifCourseOne != null">
+        if_course_one,
+      </if>
+      <if test="ifCourseTwo != null">
+        if_course_two,
+      </if>
+      <if test="ifCourseThree != null">
+        if_course_three,
+      </if>
+      <if test="ifCourseFour != null">
+        if_course_four,
+      </if>
+      <if test="ifCourseFive != null">
+        if_course_five,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseMajor != null">
+        #{courseMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="courseGrade != null">
+        #{courseGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="processClassification != null">
+        #{processClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="processNumber != null">
+        #{processNumber,jdbcType=INTEGER},
+      </if>
+      <if test="processContent != null">
+        #{processContent,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCourseOne != null">
+        #{ifCourseOne,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCourseTwo != null">
+        #{ifCourseTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCourseThree != null">
+        #{ifCourseThree,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCourseFour != null">
+        #{ifCourseFour,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCourseFive != null">
+        #{ifCourseFive,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.ProcessText">
+    update process_text
+    <set>
+      <if test="courseName != null">
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseMajor != null">
+        course_major = #{courseMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="courseGrade != null">
+        course_grade = #{courseGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="processClassification != null">
+        process_classification = #{processClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="processNumber != null">
+        process_number = #{processNumber,jdbcType=INTEGER},
+      </if>
+      <if test="processContent != null">
+        process_content = #{processContent,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCourseOne != null">
+        if_course_one = #{ifCourseOne,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCourseTwo != null">
+        if_course_two = #{ifCourseTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCourseThree != null">
+        if_course_three = #{ifCourseThree,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCourseFour != null">
+        if_course_four = #{ifCourseFour,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCourseFive != null">
+        if_course_five = #{ifCourseFive,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where `number` = #{number,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.backend.model.ProcessText">
+    update process_text
+    set course_name = #{courseName,jdbcType=VARCHAR},
+      course_major = #{courseMajor,jdbcType=VARCHAR},
+      course_grade = #{courseGrade,jdbcType=VARCHAR},
+      process_classification = #{processClassification,jdbcType=VARCHAR},
+      process_number = #{processNumber,jdbcType=INTEGER},
+      process_content = #{processContent,jdbcType=VARCHAR},
+      if_course_one = #{ifCourseOne,jdbcType=VARCHAR},
+      if_course_two = #{ifCourseTwo,jdbcType=VARCHAR},
+      if_course_three = #{ifCourseThree,jdbcType=VARCHAR},
+      if_course_four = #{ifCourseFour,jdbcType=VARCHAR},
+      if_course_five = #{ifCourseFive,jdbcType=VARCHAR}
+    where `number` = #{number,jdbcType=INTEGER}
+  </update>
+  <select id="selectOrdinary" parameterType="string" resultMap="BaseResultMap">
+    select * from process_text where course_name=#{param1,jdbcType=VARCHAR} and course_major=#{param2,jdbcType=VARCHAR} and course_grade =#{param3,jdbcType=VARCHAR}
+    and process_classification=#{param4,jdbcType=VARCHAR}
+  </select>
+  <select id="getProcessTextIf" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from process_text
+    where course_name=#{param1,jdbcType=VARCHAR} and course_major=#{param2,jdbcType=VARCHAR} and course_grade =#{param3,jdbcType=VARCHAR}
+  </select>
+</mapper>

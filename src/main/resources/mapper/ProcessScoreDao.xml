@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.ProcessScoreDao">
+  <resultMap id="BaseResultMap" type="com.example.backend.model.ProcessScore">
+    <id column="number" jdbcType="INTEGER" property="number" />
+    <result column="student_sno" jdbcType="INTEGER" property="studentSno" />
+    <result column="student_name" jdbcType="VARCHAR" property="studentName" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="student_major" jdbcType="VARCHAR" property="studentMajor" />
+    <result column="student_grade" jdbcType="VARCHAR" property="studentGrade" />
+    <result column="student_class" jdbcType="VARCHAR" property="studentClass" />
+    <result column="process_classification" jdbcType="VARCHAR" property="processClassification" />
+    <result column="process_number" jdbcType="VARCHAR" property="processNumber" />
+    <result column="process_score" jdbcType="DOUBLE" property="processScore" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    `number`, student_sno, student_name, course_name, student_major, student_grade, student_class,
+    process_classification, process_number, process_score
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from process_score
+    where student_grade = #{studentGrade,jdbcType=VARCHAR} and student_major=#{studentMajor,jdbcType=VARCHAR} and course_name=#{courseName,jdbcType=VARCHAR}
+    and process_classification = #{processClassification,jdbcType=VARCHAR} and process_number=#{processNumber,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from process_score
+    where `number` = #{number,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="number" keyProperty="number" parameterType="com.example.backend.model.ProcessScore" useGeneratedKeys="true">
+    insert into process_score (student_sno, student_name, course_name,
+      student_major, student_grade, student_class,
+      process_classification, process_number, process_score
+      )
+    values (#{studentSno,jdbcType=INTEGER}, #{studentName,jdbcType=VARCHAR}, #{courseName,jdbcType=VARCHAR},
+      #{studentMajor,jdbcType=VARCHAR}, #{studentGrade,jdbcType=VARCHAR}, #{studentClass,jdbcType=VARCHAR},
+      #{processClassification,jdbcType=VARCHAR}, #{processNumber,jdbcType=VARCHAR}, #{processScore,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="number" keyProperty="number" parameterType="com.example.backend.model.ProcessScore" useGeneratedKeys="true">
+    insert into process_score
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="studentSno != null">
+        student_sno,
+      </if>
+      <if test="studentName != null">
+        student_name,
+      </if>
+      <if test="courseName != null">
+        course_name,
+      </if>
+      <if test="studentMajor != null">
+        student_major,
+      </if>
+      <if test="studentGrade != null">
+        student_grade,
+      </if>
+      <if test="studentClass != null">
+        student_class,
+      </if>
+      <if test="processClassification != null">
+        process_classification,
+      </if>
+      <if test="processNumber != null">
+        process_number,
+      </if>
+      <if test="processScore != null">
+        process_score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="studentSno != null">
+        #{studentSno,jdbcType=INTEGER},
+      </if>
+      <if test="studentName != null">
+        #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentMajor != null">
+        #{studentMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="studentGrade != null">
+        #{studentGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="studentClass != null">
+        #{studentClass,jdbcType=VARCHAR},
+      </if>
+      <if test="processClassification != null">
+        #{processClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="processNumber != null">
+        #{processNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="processScore != null">
+        #{processScore,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.backend.model.ProcessScore">
+    update process_score
+    <set>
+      <if test="studentSno != null">
+        student_sno = #{studentSno,jdbcType=INTEGER},
+      </if>
+      <if test="studentName != null">
+        student_name = #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null">
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentMajor != null">
+        student_major = #{studentMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="studentGrade != null">
+        student_grade = #{studentGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="studentClass != null">
+        student_class = #{studentClass,jdbcType=VARCHAR},
+      </if>
+      <if test="processClassification != null">
+        process_classification = #{processClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="processNumber != null">
+        process_number = #{processNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="processScore != null">
+        process_score = #{processScore,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where `number` = #{number,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.backend.model.ProcessScore">
+    update process_score
+    set student_sno = #{studentSno,jdbcType=INTEGER},
+      student_name = #{studentName,jdbcType=VARCHAR},
+      course_name = #{courseName,jdbcType=VARCHAR},
+      student_major = #{studentMajor,jdbcType=VARCHAR},
+      student_grade = #{studentGrade,jdbcType=VARCHAR},
+      student_class = #{studentClass,jdbcType=VARCHAR},
+      process_classification = #{processClassification,jdbcType=VARCHAR},
+      process_number = #{processNumber,jdbcType=VARCHAR},
+      process_score = #{processScore,jdbcType=DOUBLE}
+    where `number` = #{number,jdbcType=INTEGER}
+  </update>
+  <select id="getProcessScore" resultMap="BaseResultMap">
+    select * from process_score where student_sno= #{param1}  and course_name=#{param2}
+  </select>
+  <delete id="deleteOrdinary">
+        delete from process_score
+    where course_name=#{param1,jdbcType=VARCHAR} and student_major=#{param2,jdbcType=VARCHAR} and student_grade =#{param3,jdbcType=VARCHAR}
+    and process_classification=#{param4,jdbcType=VARCHAR} and process_number=#{param5,jdbcType=INTEGER}
+  </delete>
+  <select id="selectOrdinary" resultMap="BaseResultMap">
+    select * from process_score
+    where course_name=#{param1,jdbcType=VARCHAR} and student_major=#{param2,jdbcType=VARCHAR} and student_grade =#{param3,jdbcType=VARCHAR}
+    and process_classification=#{param4,jdbcType=VARCHAR} and process_number=#{param5,jdbcType=INTEGER}
+  </select>
+</mapper>

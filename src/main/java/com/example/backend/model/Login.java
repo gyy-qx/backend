@@ -22,5 +22,7 @@ public class Login implements Serializable {
 
     public String id;
 
+    public String pathImg;
+
     private static final long serialVersionUID = 1L;
 }

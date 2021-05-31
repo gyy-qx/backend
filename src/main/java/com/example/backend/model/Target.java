@@ -16,7 +16,13 @@ import java.io.Serializable;
 @Component
 @Data
 public class Target implements Serializable {
+    private Integer courseNumber;
+
     private String courseName;
+
+    private String courseGrade;
+
+    private String courseMajor;
 
     private Double courseWeightOne;
 
@@ -63,36 +69,6 @@ public class Target implements Serializable {
     private Double experimentFiveTargetScore;
 
     private Double endingFiveTargetScore;
-
-    private Double ordinaryOneDistributedScore;
-
-    private Double experimentOneDistributedScore;
-
-    private Double endingOneDistributedScore;
-
-    private Double ordinaryTwoDistributedScore;
-
-    private Double experimentTwoDistributedScore;
-
-    private Double endingTwoDistributedScore;
-
-    private Double ordinaryThreeDistributedScore;
-
-    private Double experimentThreeDistributedScore;
-
-    private Double endingThreeDistributedScore;
-
-    private Double ordinaryFourDistributedScore;
-
-    private Double experimentFourDistributedScore;
-
-    private Double endingFourDistributedScore;
-
-    private Double ordinaryFiveDistributedScore;
-
-    private Double experimentFiveDistributedScore;
-
-    private Double endingFiveDistributedScore;
 
     private static final long serialVersionUID = 1L;
 }

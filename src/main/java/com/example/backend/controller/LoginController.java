@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
     @Autowired
-
     LoginService loginService;
+
     @RequestMapping(path = "/login")
     public String login(@RequestBody Login login_person) {
         Integer user=login_person.getUser();
