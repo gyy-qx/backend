@@ -129,11 +129,17 @@ public class scoreService {
     }
 
     public List<Result> getResultScore(String studentClass,String courseName){
-        System.out.println((resultDao.getResultScore(studentClass,courseName)).size());
         if((resultDao.getResultScore(studentClass,courseName)).size()==0){
             return null;
         }
         else return resultDao.getResultScore(studentClass,courseName);
+    }
+
+    public List<Result> getResultScoreByGrade(String courseName){
+        if((resultDao.getResultScoreByGrade(courseName)).size()==0){
+            return null;
+        }
+        else return resultDao.getResultScoreByGrade(courseName);
     }
 
     public void updateAchievementDegree(List<Result> resultList,ClassResult classResult){
@@ -190,7 +196,10 @@ public class scoreService {
     public List<ProcessScore> getProcessScore(String json){
         Integer studentSno = Integer.parseInt(JSON.parseObject(json).get("studentSno").toString());
         String courseName = JSON.parseObject(json).get("courseName").toString();
-        return processScoreDao.getProcessScore(studentSno,courseName);
+//        return processScoreDao.getProcessScore(studentSno,courseName);
+        List<ProcessScore> processScore = processScoreDao.getProcessScore(studentSno, courseName);
+        return processScore;
+
     }
 
     public List<ProcessText> getProcessTextIf(String json){

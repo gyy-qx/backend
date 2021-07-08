@@ -98,6 +98,12 @@ public List<Course> selectCourseByMajor(@RequestBody String json){
         return chairmanService.getTeacherNumber(json);
     }
 
+    @RequestMapping(path="/searchTeacherOne")
+    public Teacher searchTeacherOne(@RequestBody String json){
+        String teacherName = JSON.parseObject(json).get("teacherName").toString();
+        return chairmanService.searchTeacherOne(teacherName);
+    }
+
 //  学生管理
     @RequestMapping(path = "/insertStudent")
     public String insertStudent(@RequestBody Student student){

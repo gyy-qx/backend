@@ -26,6 +26,16 @@ public class ChairmanService {
     TargetTextDao targetTextDao;
     @Autowired
     TargetDao targetDao;
+    @Autowired
+    ProcessTextDao processTextDao;
+    @Autowired
+    ProcessScoreDao processScoreDao;
+    @Autowired
+    EmailDao emailDao;
+    @Autowired
+    ResultDao resultDao;
+    @Autowired
+    ClassResultDao classResultDao;
 
     public String selectByNumber(Integer researChairman){
         return departmentDao.selectByNumber(researChairman);
@@ -133,6 +143,10 @@ public class ChairmanService {
     public Integer getTeacherNumber(String json){
         String teacherName = JSON.parseObject(json).get("teacherName").toString();
         return teacherDao.getTeacherNumber(teacherName);
+    }
+    public Teacher searchTeacherOne(String teacherName){
+        Integer teacherNumber = teacherDao.getTeacherNumber(teacherName);
+        return teacherDao.selectByPrimaryKey(teacherNumber);
     }
 
     public String insertStudent(Student student){

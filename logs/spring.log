@@ -1,44 +1,22 @@
-2021-05-31 00:16:03.549  INFO 10456 --- [restartedMain] com.example.backend.BackendApplication   : Starting BackendApplication using Java 11.0.5 on LAPTOP-FKVV4DEE with PID 10456 (E:\Download\workspace\backend\target\classes started by lenovo in E:\Download\workspace\backend)
-2021-05-31 00:16:03.642  INFO 10456 --- [restartedMain] com.example.backend.BackendApplication   : No active profile set, falling back to default profiles: default
-2021-05-31 00:16:04.356  INFO 10456 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2021-05-31 00:16:04.359  INFO 10456 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2021-05-31 00:16:12.071  INFO 10456 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2021-05-31 00:16:12.164  INFO 10456 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-05-31 00:16:12.164  INFO 10456 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.43]
-2021-05-31 00:16:12.175  INFO 10456 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
-2021-05-31 00:16:12.175  INFO 10456 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
-2021-05-31 00:16:12.176  INFO 10456 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
-2021-05-31 00:16:12.446  INFO 10456 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
-2021-05-31 00:16:12.763  INFO 10456 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-05-31 00:16:12.764  INFO 10456 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 8393 ms
-2021-05-31 00:16:13.490  INFO 10456 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2021-05-31 00:16:14.223  INFO 10456 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2021-05-31 00:16:16.647  INFO 10456 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-05-31 00:16:17.893  INFO 10456 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2021-05-31 00:16:17.964  INFO 10456 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2021-05-31 00:16:17.984  INFO 10456 --- [restartedMain] com.example.backend.BackendApplication   : Started BackendApplication in 17.768 seconds (JVM running for 23.372)
-2021-05-31 00:20:13.906  INFO 10456 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-05-31 00:20:13.907  INFO 10456 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-05-31 00:20:13.908  INFO 10456 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2021-05-31 16:33:19.804  INFO 16688 --- [restartedMain] com.example.backend.BackendApplication   : Starting BackendApplication using Java 11.0.5 on LAPTOP-FKVV4DEE with PID 16688 (E:\Download\workspace\backend\target\classes started by lenovo in E:\Download\workspace\backend)
-2021-05-31 16:33:19.827  INFO 16688 --- [restartedMain] com.example.backend.BackendApplication   : No active profile set, falling back to default profiles: default
-2021-05-31 16:33:19.909  INFO 16688 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2021-05-31 16:33:19.909  INFO 16688 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2021-05-31 16:33:24.928  INFO 16688 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2021-05-31 16:33:24.997  INFO 16688 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-05-31 16:33:24.997  INFO 16688 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.43]
-2021-05-31 16:33:25.001  INFO 16688 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
-2021-05-31 16:33:25.002  INFO 16688 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
-2021-05-31 16:33:25.003  INFO 16688 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
-2021-05-31 16:33:25.770  INFO 16688 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
-2021-05-31 16:33:26.279  INFO 16688 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-05-31 16:33:26.282  INFO 16688 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6362 ms
-2021-05-31 16:33:27.331  INFO 16688 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
-2021-05-31 16:33:27.871  INFO 16688 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
-2021-05-31 16:33:30.210  INFO 16688 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-05-31 16:33:31.900  INFO 16688 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2021-05-31 16:33:32.287  INFO 16688 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2021-05-31 16:33:32.334  INFO 16688 --- [restartedMain] com.example.backend.BackendApplication   : Started BackendApplication in 13.429 seconds (JVM running for 17.082)
-2021-05-31 17:16:27.881  INFO 16688 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-05-31 17:16:27.882  INFO 16688 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-05-31 17:16:27.884  INFO 16688 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-07-08 18:28:02.621  INFO 1880 --- [restartedMain] com.example.backend.BackendApplication   : Starting BackendApplication using Java 11.0.5 on LAPTOP-FKVV4DEE with PID 1880 (E:\Download\workspace\backend\target\classes started by lenovo in E:\Download\workspace\backend)
+2021-07-08 18:28:02.678  INFO 1880 --- [restartedMain] com.example.backend.BackendApplication   : No active profile set, falling back to default profiles: default
+2021-07-08 18:28:02.792  INFO 1880 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-07-08 18:28:02.792  INFO 1880 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-07-08 18:28:06.066  INFO 1880 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-07-08 18:28:06.088  INFO 1880 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-07-08 18:28:06.088  INFO 1880 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-07-08 18:28:06.091  INFO 1880 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.24] using APR version [1.7.0].
+2021-07-08 18:28:06.092  INFO 1880 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2021-07-08 18:28:06.092  INFO 1880 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2021-07-08 18:28:06.103  INFO 1880 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1g  21 Apr 2020]
+2021-07-08 18:28:06.183  INFO 1880 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-07-08 18:28:06.183  INFO 1880 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3389 ms
+2021-07-08 18:28:06.390  INFO 1880 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2021-07-08 18:28:06.593  INFO 1880 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2021-07-08 18:28:07.535  INFO 1880 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-08 18:28:08.001  INFO 1880 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-07-08 18:28:08.048  INFO 1880 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-07-08 18:28:08.063  INFO 1880 --- [restartedMain] com.example.backend.BackendApplication   : Started BackendApplication in 6.264 seconds (JVM running for 9.706)
+2021-07-08 18:28:25.522  INFO 1880 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-07-08 18:28:25.522  INFO 1880 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-07-08 18:28:25.524  INFO 1880 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms

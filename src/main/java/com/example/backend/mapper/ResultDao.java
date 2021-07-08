@@ -16,6 +16,7 @@ public interface ResultDao {
 
     int insertSelective(Result record);
     List<Result> getResultScore(String studentClass, String courseName);
+    List<Result> getResultScoreByGrade(String courseName);
     int updateByPrimaryKeySelective(Result record);
     int getResultScoreNumber(String courseName,Integer studentSno);
 }

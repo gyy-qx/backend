@@ -11,7 +11,7 @@
     `user`, `password`, id, path_img
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from login
     where `user` = #{user,jdbcType=INTEGER}
@@ -20,10 +20,10 @@
     delete from login
     where `user` = #{user,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="user" keyProperty="user" parameterType="com.example.backend.model.Login" useGeneratedKeys="true">
-    insert into login (`password`, id, path_img
+  <insert id="insert" keyColumn="user" keyProperty="user" parameterType="com.example.backend.model.Login">
+    insert into login (`user`,`password`, id, path_img
       )
-    values (#{password,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{pathImg,jdbcType=VARCHAR}
+    values (#{user,jdbcType=INTEGER},#{password,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{pathImg,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyColumn="user" keyProperty="user" parameterType="com.example.backend.model.Login" useGeneratedKeys="true">

@@ -336,6 +336,11 @@ select
     <include refid="Base_Column_List" />
     from result where student_class=#{studentClass,jdbcType=VARCHAR} and course_name=#{courseName,jdbcType=VARCHAR}
   </select>
+  <select id="getResultScoreByGrade" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from result where course_name=#{courseName,jdbcType=VARCHAR}
+  </select>
   <select id="getResultScoreNumber" resultType="integer">
     select  number from  result where student_sno = #{param2} and course_name=#{param1}
   </select>

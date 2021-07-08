@@ -148,6 +148,12 @@
   <select id="getProcessScore" resultMap="BaseResultMap">
     select * from process_score where student_sno= #{param1}  and course_name=#{param2}
   </select>
+  <select id="selectProcessScoreByCourse" resultMap="BaseResultMap">
+    select * from process_score where course_name=#{param1,jdbcType=VARCHAR} and student_major=#{param2,jdbcType=VARCHAR} and student_grade =#{param3,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteProcessScoreByCourse">
+    delete from process_score where course_name=#{param1,jdbcType=VARCHAR} and student_major=#{param2,jdbcType=VARCHAR} and student_grade =#{param3,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteOrdinary">
         delete from process_score
     where course_name=#{param1,jdbcType=VARCHAR} and student_major=#{param2,jdbcType=VARCHAR} and student_grade =#{param3,jdbcType=VARCHAR}

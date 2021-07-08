@@ -18,4 +18,5 @@ public interface ProcessTextDao {
     int deleteOrdinary(String courseName, String courseMajor, String courseGrade, String processClassification,Integer processNumber);
     List<ProcessText> selectOrdinary(String courseName, String courseMajor, String courseGrade, String processClassification);
     List<ProcessText> getProcessTextIf(String courseName, String courseMajor, String courseGrade);
+    int deleteProcessTextByCourse(String courseName, String courseMajor, String courseGrade);
 }

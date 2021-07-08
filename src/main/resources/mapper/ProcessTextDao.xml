@@ -175,6 +175,10 @@
     select
     <include refid="Base_Column_List" />
     from process_text
+  where course_name=#{param1,jdbcType=VARCHAR} and course_major=#{param2,jdbcType=VARCHAR} and course_grade =#{param3,jdbcType=VARCHAR}
+</select>
+  <delete id="deleteProcessTextByCourse">
+    delete <include refid="Base_Column_List" /> from process_text
     where course_name=#{param1,jdbcType=VARCHAR} and course_major=#{param2,jdbcType=VARCHAR} and course_grade =#{param3,jdbcType=VARCHAR}
-  </select>
+  </delete>
 </mapper>

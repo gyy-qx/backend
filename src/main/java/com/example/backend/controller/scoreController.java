@@ -54,6 +54,7 @@ public class scoreController {
 
     @RequestMapping(path="/scoreRatio")
     public String insertRatio(@RequestBody String json) throws JsonProcessingException {
+        System.out.println(json);
         ObjectMapper objectMapper = new ObjectMapper();
         String courseObject=JSON.parseObject(json).get("course").toString();
         Course course = objectMapper.readValue(courseObject, Course.class);
@@ -110,6 +111,12 @@ public class scoreController {
         String studentClass = JSON.parseObject(json).get("studentClass").toString();
         String courseName = JSON.parseObject(json).get("courseName").toString();
         return scoreService.getResultScore(studentClass,courseName);
+    }
+
+    @RequestMapping(path="/getResultScoreByGrade")
+    public List<Result> getResultScoreByGrade(@RequestBody String json){
+        String courseName = JSON.parseObject(json).get("courseName").toString();
+        return scoreService.getResultScoreByGrade(courseName);
     }
 
     @RequestMapping(path="/updateAchievementDegree")
