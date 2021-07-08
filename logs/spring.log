@@ -20,3 +20,4 @@
 2021-07-08 18:28:25.522  INFO 1880 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2021-07-08 18:28:25.522  INFO 1880 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2021-07-08 18:28:25.524  INFO 1880 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2021-07-08 20:27:11.476  INFO 1880 --- [http-nio-8080-exec-4] com.example.backend.controller.Hello     : 调用了/hello
